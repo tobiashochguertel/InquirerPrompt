@@ -96,7 +96,9 @@ class InquirerPyCheckboxControl(InquirerPyUIListControl):
                 display_choices.append(("", " "))
             display_choices.extend(expand_formatted_text("", choice["name"]))
         else:
-            display_choices.extend(expand_formatted_text("class:separator", choice["name"]))
+            display_choices.extend(
+                expand_formatted_text("class:separator", choice["name"])
+            )
         return display_choices
 
 
