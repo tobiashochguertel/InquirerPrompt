@@ -2,7 +2,7 @@ name: CD — Release
 
 on:
   push:
-    branches: [master, main]
+    branches: [main]
 
 permissions:
   contents: write

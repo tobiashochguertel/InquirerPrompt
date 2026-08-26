@@ -89,7 +89,7 @@ tag_format = "v{version}"
 major_on_zero = false
 
 [tool.semantic_release.branches.main]
-match = "(master|main)"
+match = "main"
 
 [tool.semantic_release.changelog]
 changelog_file = "CHANGELOG.md"

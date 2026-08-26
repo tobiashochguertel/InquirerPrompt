@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [master, main, develop]
+    branches: [main, dev]
   pull_request:
-    branches: [master, main]
+    branches: [main, dev]
   workflow_dispatch:
 
 concurrency:
@@ -45,7 +45,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
