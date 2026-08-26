@@ -10,9 +10,9 @@ from prompt_toolkit.filters.base import Condition, FilterOrBool
 from prompt_toolkit.key_binding.key_bindings import KeyHandlerCallable
 from prompt_toolkit.keys import Keys
 
-from InquirerPy.base.simple import BaseSimplePrompt
-from InquirerPy.enum import INQUIRERPY_KEYBOARD_INTERRUPT
-from InquirerPy.utils import (
+from InquirerPrompt.base.simple import BaseSimplePrompt
+from InquirerPrompt.enum import INQUIRERPY_KEYBOARD_INTERRUPT
+from InquirerPrompt.utils import (
     InquirerPySessionResult,
     InquirerPyStyle,
     InquirerPyValidate,

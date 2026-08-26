@@ -102,7 +102,7 @@ this value and have an empty input buffer by setting the parameter `default=None
   <summary>Classic Syntax (PyInquirer)</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 questions = [
   {
@@ -121,7 +121,7 @@ result = prompt(questions)
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.number(message="Number:", default=None).execute()
 ```
@@ -141,7 +141,7 @@ configured max/min value.
   <summary>Classic Syntax (PyInquirer)</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 questions = [
   {
@@ -161,7 +161,7 @@ result = prompt(questions)
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.number(
   message="Number:", max_allowed=10, min_allowed=-100,
@@ -183,7 +183,7 @@ You can enable decimal input by setting the argument `float_allowed` to True.
   <summary>Classic Syntax (PyInquirer)</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 questions = [
   {
@@ -202,7 +202,7 @@ result = prompt(questions)
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.number(
   message="Number:", float_allowed=True,
@@ -225,7 +225,7 @@ Replace mode introduce some slight inconsistency with the terminal input behavio
   <summary>Classic Syntax (PyInquirer)</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 questions = [
   {
@@ -244,7 +244,7 @@ result = prompt(questions)
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.number(
   message="Number:", replace_mode=True,

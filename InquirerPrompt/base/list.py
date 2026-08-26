@@ -6,10 +6,10 @@ from typing import Any, Callable, List, Optional
 from prompt_toolkit.filters.base import Condition
 from prompt_toolkit.keys import Keys
 
-from InquirerPy.base.complex import BaseComplexPrompt
-from InquirerPy.base.control import InquirerPyUIListControl
-from InquirerPy.separator import Separator
-from InquirerPy.utils import (
+from InquirerPrompt.base.complex import BaseComplexPrompt
+from InquirerPrompt.base.control import InquirerPyUIListControl
+from InquirerPrompt.separator import Separator
+from InquirerPrompt.utils import (
     InquirerPyKeybindings,
     InquirerPyMessage,
     InquirerPySessionResult,

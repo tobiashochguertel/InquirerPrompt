@@ -8,18 +8,18 @@ from prompt_toolkit.enums import EditingMode
 from prompt_toolkit.filters.base import Condition
 from prompt_toolkit.keys import Keys
 
-from InquirerPy.enum import INQUIRERPY_KEYBOARD_INTERRUPT
-from InquirerPy.exceptions import RequiredKeyNotFound
-from InquirerPy.prompts.input import InputPrompt
-from InquirerPy.utils import get_style
-from InquirerPy.validator import NumberValidator
+from InquirerPrompt.enum import INQUIRERPY_KEYBOARD_INTERRUPT
+from InquirerPrompt.exceptions import RequiredKeyNotFound
+from InquirerPrompt.prompts.input import InputPrompt
+from InquirerPrompt.utils import get_style
+from InquirerPrompt.validator import NumberValidator
 from tests.style import get_sample_style
 
 
 class TestBaseSimple(unittest.TestCase):
-    @patch("InquirerPy.base.simple.KeyBindings.add")
-    @patch("InquirerPy.base.simple.Validator.from_callable")
-    @patch("InquirerPy.base.simple.Style.from_dict")
+    @patch("InquirerPrompt.base.simple.KeyBindings.add")
+    @patch("InquirerPrompt.base.simple.Validator.from_callable")
+    @patch("InquirerPrompt.base.simple.Style.from_dict")
     def test_constructor_default(self, mocked_style, mocked_validator, mocked_kb):
         input_prompt = InputPrompt(message="Enter your name", style=None, default="1")
         self.assertEqual(input_prompt._message, "Enter your name")
@@ -33,8 +33,8 @@ class TestBaseSimple(unittest.TestCase):
         )
         mocked_kb.assert_has_calls([call("c-c")])
 
-    @patch("InquirerPy.base.simple.Validator.from_callable")
-    @patch("InquirerPy.base.simple.Style.from_dict")
+    @patch("InquirerPrompt.base.simple.Validator.from_callable")
+    @patch("InquirerPrompt.base.simple.Style.from_dict")
     def test_constructor_custom(self, mocked_style, mocked_validator):
         input_prompt = InputPrompt(
             message=lambda _: "Enter your name",
@@ -102,7 +102,7 @@ class TestBaseSimple(unittest.TestCase):
             message, [("class:skipped", "[?]"), ("class:skipped", " Enter your name ")]
         )
 
-    @patch("InquirerPy.base.simple.KeyBindings.add")
+    @patch("InquirerPrompt.base.simple.KeyBindings.add")
     def test_register_kb(self, mocked_kb):
         prompt = InputPrompt(message="")
         hello = prompt.register_kb("alt-a", "alt-b", filter=True)
@@ -122,7 +122,7 @@ class TestBaseSimple(unittest.TestCase):
 
         mocked_kb.assert_has_calls([call("c-i", filter=condition)])
 
-    @patch("InquirerPy.base.simple.BaseSimplePrompt.register_kb")
+    @patch("InquirerPrompt.base.simple.BaseSimplePrompt.register_kb")
     def test_keybinding_factory(self, mocked_kb):
         prompt = InputPrompt(message="")
         mocked_kb.assert_has_calls([call(Keys.Enter, filter=ANY)])

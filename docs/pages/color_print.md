@@ -17,8 +17,8 @@ text will be printed above the running prompt. Otherwise the colored text will s
 ![demo](https://assets.kazhala.me/InquirerPy/color_print.gif)
 
 ```python
-from InquirerPy.utils import color_print
-from InquirerPy import inquirer
+from InquirerPrompt.utils import color_print
+from InquirerPrompt import inquirer
 
 prompt = inquirer.text(message="Name:")
 

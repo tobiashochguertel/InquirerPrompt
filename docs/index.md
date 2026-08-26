@@ -49,7 +49,7 @@ Optionally provide a `name` key, `prompt` will store the result under the provid
 no `name` key is provided, the index of the question will be used.
 
 ```python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 questions = [
     {"type": "input", "message": "What's your name:", "name": "name"},
@@ -72,7 +72,7 @@ Alternate syntax directly interact with individual `prompt` classes. It's more f
 and also provides IDE type hintings/completions.
 
 ```python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 name = inquirer.text(message="What's your name:").execute()
 fav_lang = inquirer.select(

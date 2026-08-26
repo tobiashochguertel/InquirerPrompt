@@ -1,6 +1,6 @@
-from InquirerPy import prompt
-from InquirerPy.base.control import Choice
-from InquirerPy.separator import Separator
+from InquirerPrompt import prompt
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.separator import Separator
 
 
 def main():

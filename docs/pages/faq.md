@@ -21,7 +21,7 @@ For {ref}`index:Classic Syntax (PyInquirer)` user, it would be just a direct moc
 ---
 caption: Module/somefunction.py
 ---
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 def get_name():
     return prompt({"type": "input", "message": "Name:"})
@@ -50,7 +50,7 @@ For {ref}`index:Alternate Syntax` user, you'd have to mock 1 level deeper to the
 ---
 caption: Module/somefunction.py
 ---
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 def get_name():
     return inquirer.text(message="Name:").execute()
@@ -80,10 +80,11 @@ This may be supported in the future but not a priority at the moment.
 
 ## Is InquirerPrompt compatible with kazhala/InquirerPy (upstream)?
 
-**Yes — InquirerPrompt is designed to be a drop-in replacement for the upstream `InquirerPrompt` package.**
+**Yes — InquirerPrompt is designed to be a drop-in replacement for the upstream `InquirerPy` package.**
 
-The import name is unchanged: `import InquirerPy` works exactly the same as before.
-Simply replace your `pip install InquirerPy` with `pip install InquirerPrompt` and nothing else needs to change.
+The import name has changed from `import InquirerPy` to `import InquirerPrompt`.
+Replace your `pip install InquirerPy` with `pip install InquirerPrompt` and update your imports
+from `from InquirerPy import ...` to `from InquirerPrompt import ...`. All public APIs are otherwise unchanged.
 
 ```sh
 # Before (upstream, now unmaintained)
@@ -94,8 +95,8 @@ pip install InquirerPrompt
 ```
 
 ```python
-# Your code stays exactly the same
-from InquirerPy import prompt, inquirer
+# Update your imports — everything else stays the same
+from InquirerPrompt import prompt, inquirer
 ```
 
 Our goal is to maintain **full backwards-compatibility** with upstream `InquirerPy 0.3.4` (the last upstream release) for as long as possible.

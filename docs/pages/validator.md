@@ -12,7 +12,7 @@ Below is an example of ensuring the user doesn't by pass an empty input.
   <summary>Classic Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 result = prompt(
     [
@@ -32,7 +32,7 @@ result = prompt(
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.text(
     message="Name:",
@@ -49,7 +49,7 @@ Below is another example which ensure that at least 2 options are checked.
   <summary>Classic Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 result = prompt(
     [
@@ -71,7 +71,7 @@ result = prompt(
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.checkbox(
     message="Select toppings:",
@@ -151,8 +151,8 @@ There's a few pre-built common validator ready to use.
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
-from InquirerPy.validator import PathValidator
+from InquirerPrompt import prompt
+from InquirerPrompt.validator import PathValidator
 
 result = prompt(
     [
@@ -171,8 +171,8 @@ result = prompt(
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
-from InquirerPy.validator import PathValidator
+from InquirerPrompt import inquirer
+from InquirerPrompt.validator import PathValidator
 
 result = inquirer.filepath(message="Enter path:", validate=PathValidator()).execute()
 ```
@@ -190,8 +190,8 @@ result = inquirer.filepath(message="Enter path:", validate=PathValidator()).exec
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
-from InquirerPy.validator import EmptyInputValidator
+from InquirerPrompt import prompt
+from InquirerPrompt.validator import EmptyInputValidator
 
 result = prompt(
     [{"type": "input", "message": "Name:", "validate": EmptyInputValidator()}]
@@ -204,8 +204,8 @@ result = prompt(
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
-from InquirerPy.validator import EmptyInputValidator
+from InquirerPrompt import inquirer
+from InquirerPrompt.validator import EmptyInputValidator
 
 result = inquirer.text(
     message="Name:", validate=EmptyInputValidator("Input should not be empty")
@@ -225,8 +225,8 @@ result = inquirer.text(
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
-from InquirerPy.validator import PasswordValidator
+from InquirerPrompt import prompt
+from InquirerPrompt.validator import PasswordValidator
 
 result = prompt(
     [
@@ -251,8 +251,8 @@ result = prompt(
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
-from InquirerPy.validator import PasswordValidator
+from InquirerPrompt import inquirer
+from InquirerPrompt.validator import PasswordValidator
 
 result = inquirer.secret(
     message="New Password:",
@@ -279,8 +279,8 @@ result = inquirer.secret(
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
-from InquirerPy.validator import NumberValidator
+from InquirerPrompt import prompt
+from InquirerPrompt.validator import NumberValidator
 
 result = prompt(
     [
@@ -301,8 +301,8 @@ result = prompt(
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
-from InquirerPy.validator import NumberValidator
+from InquirerPrompt import inquirer
+from InquirerPrompt.validator import NumberValidator
 
 result = inquirer.text(message="Age:", validate=NumberValidator()).execute()
 ```

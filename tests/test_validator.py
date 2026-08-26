@@ -6,7 +6,7 @@ from pathlib import Path
 from prompt_toolkit.document import Document
 from prompt_toolkit.validation import ValidationError
 
-from InquirerPy.validator import *
+from InquirerPrompt.validator import *
 
 
 class TestValidators(unittest.TestCase):

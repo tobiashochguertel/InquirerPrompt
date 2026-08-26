@@ -14,10 +14,10 @@ from prompt_toolkit.input.defaults import create_pipe_input
 from prompt_toolkit.output import DummyOutput
 from prompt_toolkit.shortcuts.prompt import CompleteStyle
 
-from InquirerPy.exceptions import InvalidArgument
-from InquirerPy.prompts.filepath import FilePathCompleter, FilePathPrompt
-from InquirerPy.utils import InquirerPyStyle
-from InquirerPy.validator import PathValidator
+from InquirerPrompt.exceptions import InvalidArgument
+from InquirerPrompt.prompts.filepath import FilePathCompleter, FilePathPrompt
+from InquirerPrompt.utils import InquirerPyStyle
+from InquirerPrompt.validator import PathValidator
 
 
 class TestFilePath(unittest.TestCase):
@@ -210,11 +210,11 @@ class TestFilePath(unittest.TestCase):
             ],
         )
 
-    @patch("InquirerPy.prompts.input.SimpleLexer")
-    @patch("InquirerPy.prompts.filepath.FilePathPrompt._get_prompt_message")
-    @patch("InquirerPy.base.simple.Style.from_dict")
-    @patch("InquirerPy.base.simple.KeyBindings")
-    @patch("InquirerPy.prompts.input.PromptSession")
+    @patch("InquirerPrompt.prompts.input.SimpleLexer")
+    @patch("InquirerPrompt.prompts.filepath.FilePathPrompt._get_prompt_message")
+    @patch("InquirerPrompt.base.simple.Style.from_dict")
+    @patch("InquirerPrompt.base.simple.KeyBindings")
+    @patch("InquirerPrompt.prompts.input.PromptSession")
     def test_callable_called(
         self,
         MockedSession,

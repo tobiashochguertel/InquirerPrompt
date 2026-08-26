@@ -41,7 +41,7 @@ Union[List[Dict[str, Any]], Dict[str, Any]]
 A {class}`list` of question to ask.
 
 ```python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 questions = [
     {
@@ -60,7 +60,7 @@ result = prompt(questions=questions)
 If there's only one [question](#question), you can also just provide a {class}`dict` instead of a {class}`list` of {class}`dict`.
 
 ```python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 result = prompt(questions={"type": "input", "message": "Enter your name:"})
 ```
@@ -129,7 +129,7 @@ for their specific options/parameters.
 ```{code-block} python
 import asyncio
 
-from InquirerPy import inquirer, prompt_async
+from InquirerPrompt import inquirer, prompt_async
 
 
 async def main():

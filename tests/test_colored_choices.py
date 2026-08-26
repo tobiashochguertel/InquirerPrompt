@@ -9,17 +9,17 @@ import unittest
 
 from prompt_toolkit.formatted_text import ANSI, HTML, FormattedText
 
-from InquirerPy.base.control import Choice
-from InquirerPy.prompts.checkbox import InquirerPyCheckboxControl
-from InquirerPy.prompts.expand import (
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.prompts.checkbox import InquirerPyCheckboxControl
+from InquirerPrompt.prompts.expand import (
     ExpandChoice,
     ExpandHelp,
     InquirerPyExpandControl,
 )
-from InquirerPy.prompts.list import InquirerPyListControl
-from InquirerPy.prompts.rawlist import InquirerPyRawlistControl
-from InquirerPy.separator import Separator
-from InquirerPy.utils import expand_formatted_text
+from InquirerPrompt.prompts.list import InquirerPyListControl
+from InquirerPrompt.prompts.rawlist import InquirerPyRawlistControl
+from InquirerPrompt.separator import Separator
+from InquirerPrompt.utils import expand_formatted_text
 
 
 class TestExpandFormattedText(unittest.TestCase):

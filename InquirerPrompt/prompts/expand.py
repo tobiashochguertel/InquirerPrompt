@@ -3,13 +3,13 @@
 from dataclasses import dataclass
 from typing import Any, Callable, List, Optional, Tuple, Union
 
-from InquirerPy.base import BaseListPrompt, InquirerPyUIListControl
-from InquirerPy.base.control import Choice
-from InquirerPy.enum import INQUIRERPY_POINTER_SEQUENCE
-from InquirerPy.exceptions import InvalidArgument, RequiredKeyNotFound
-from InquirerPy.prompts.list import ListPrompt
-from InquirerPy.separator import Separator
-from InquirerPy.utils import (
+from InquirerPrompt.base import BaseListPrompt, InquirerPyUIListControl
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.enum import INQUIRERPY_POINTER_SEQUENCE
+from InquirerPrompt.exceptions import InvalidArgument, RequiredKeyNotFound
+from InquirerPrompt.prompts.list import ListPrompt
+from InquirerPrompt.separator import Separator
+from InquirerPrompt.utils import (
     InquirerPyDefault,
     InquirerPyKeybindings,
     InquirerPyListChoices,
@@ -272,7 +272,7 @@ class ExpandPrompt(ListPrompt):
             leaving ghost output from previous iterations on screen.
 
     Examples:
-        >>> from InquirerPy import inquirer
+        >>> from InquirerPrompt import inquirer
         >>> result = inquirer.expand(message="Select one:", choices[{"name": "1", "value": "1", "key": "a"}]).execute()
         >>> print(result)
         "1"

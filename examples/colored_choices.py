@@ -9,9 +9,9 @@ Run in a terminal:
 """
 from prompt_toolkit.formatted_text import HTML, ANSI
 
-from InquirerPy import inquirer
-from InquirerPy.base.control import Choice
-from InquirerPy.separator import Separator
+from InquirerPrompt import inquirer
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.separator import Separator
 
 
 def test_select():

@@ -32,11 +32,11 @@ jobs:
       - name: Install dependencies
         run: uv sync --group dev
       - name: Run ruff check
-        run: uv run ruff check InquirerPy/ tests/
+        run: uv run ruff check InquirerPrompt/ tests/
       - name: Run ruff format
-        run: uv run ruff format --check InquirerPy/ tests/
+        run: uv run ruff format --check InquirerPrompt/ tests/
       - name: Run pyright
-        run: uv run pyright InquirerPy
+        run: uv run pyright InquirerPrompt
 
   test:
     name: Test (Python ${{ matrix.python-version }})

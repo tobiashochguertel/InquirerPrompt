@@ -25,9 +25,9 @@ following types of prompts which involves list of choices:
   us-east-1
   us-east-2
 """
-from InquirerPy import prompt
-from InquirerPy.base.control import Choice
-from InquirerPy.separator import Separator
+from InquirerPrompt import prompt
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.separator import Separator
 
 result = prompt(
     questions=[
@@ -62,9 +62,9 @@ result = prompt(
   us-east-1
   us-east-2
 """
-from InquirerPy import inquirer
-from InquirerPy.base.control import Choice
-from InquirerPy.separator import Separator
+from InquirerPrompt import inquirer
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.separator import Separator
 
 region = inquirer.select(
     message="Select regions:",

@@ -4,7 +4,7 @@ import unittest
 from prompt_toolkit.filters.base import Condition, Filter
 from prompt_toolkit.layout.containers import ConditionalContainer
 
-from InquirerPy.containers.spinner import SPINNERS, SpinnerWindow
+from InquirerPrompt.containers.spinner import SPINNERS, SpinnerWindow
 
 
 class TestSpinner(unittest.TestCase):

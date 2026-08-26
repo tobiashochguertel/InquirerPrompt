@@ -17,15 +17,15 @@ from prompt_toolkit.layout.layout import Layout
 from prompt_toolkit.validation import ValidationError
 from prompt_toolkit.widgets.base import Frame
 
-from InquirerPy.base import InquirerPyUIListControl
-from InquirerPy.base.complex import FakeDocument
-from InquirerPy.base.list import BaseListPrompt
-from InquirerPy.containers.instruction import InstructionWindow
-from InquirerPy.containers.message import MessageWindow
-from InquirerPy.containers.validation import ValidationFloat
-from InquirerPy.enum import INQUIRERPY_POINTER_SEQUENCE
-from InquirerPy.separator import Separator
-from InquirerPy.utils import (
+from InquirerPrompt.base import InquirerPyUIListControl
+from InquirerPrompt.base.complex import FakeDocument
+from InquirerPrompt.base.list import BaseListPrompt
+from InquirerPrompt.containers.instruction import InstructionWindow
+from InquirerPrompt.containers.message import MessageWindow
+from InquirerPrompt.containers.validation import ValidationFloat
+from InquirerPrompt.enum import INQUIRERPY_POINTER_SEQUENCE
+from InquirerPrompt.separator import Separator
+from InquirerPrompt.utils import (
     InquirerPyDefault,
     InquirerPyKeybindings,
     InquirerPyListChoices,
@@ -162,7 +162,7 @@ class ListPrompt(BaseListPrompt):
             leaving ghost output from previous iterations on screen.
 
     Examples:
-        >>> from InquirerPy import inquirer
+        >>> from InquirerPrompt import inquirer
         >>> result = inquirer.select(message="Select one:", choices=[1, 2, 3]).execute()
         >>> print(result)
         1

@@ -26,12 +26,12 @@ from prompt_toolkit.layout.layout import Layout
 from prompt_toolkit.lexers.base import SimpleLexer
 from prompt_toolkit.validation import ValidationError
 
-from InquirerPy.base.complex import BaseComplexPrompt, FakeDocument
-from InquirerPy.containers.instruction import InstructionWindow
-from InquirerPy.containers.validation import ValidationWindow
-from InquirerPy.enum import INQUIRERPY_QMARK_SEQUENCE
-from InquirerPy.exceptions import InvalidArgument
-from InquirerPy.utils import (
+from InquirerPrompt.base.complex import BaseComplexPrompt, FakeDocument
+from InquirerPrompt.containers.instruction import InstructionWindow
+from InquirerPrompt.containers.validation import ValidationWindow
+from InquirerPrompt.enum import INQUIRERPY_QMARK_SEQUENCE
+from InquirerPrompt.exceptions import InvalidArgument
+from InquirerPrompt.utils import (
     InquirerPyDefault,
     InquirerPyKeybindings,
     InquirerPyMessage,
@@ -100,7 +100,7 @@ class NumberPrompt(BaseComplexPrompt):
             leaving ghost output from previous iterations on screen.
 
     Examples:
-        >>> from InquirerPy import inquirer
+        >>> from InquirerPrompt import inquirer
         >>> result = inquirer.number(message="Enter number:").execute()
         >>> print(result)
         0

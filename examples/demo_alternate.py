@@ -3,9 +3,9 @@ import os
 
 import boto3
 
-from InquirerPy import inquirer
-from InquirerPy.exceptions import InvalidArgument
-from InquirerPy.validator import PathValidator
+from InquirerPrompt import inquirer
+from InquirerPrompt.exceptions import InvalidArgument
+from InquirerPrompt.validator import PathValidator
 
 client = boto3.client("s3")
 os.environ["INQUIRERPY_VI_MODE"] = "true"

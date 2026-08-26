@@ -7,9 +7,9 @@ from prompt_toolkit.keys import Keys
 from prompt_toolkit.shortcuts import PromptSession
 from prompt_toolkit.validation import ValidationError
 
-from InquirerPy.base import BaseSimplePrompt
-from InquirerPy.exceptions import InvalidArgument
-from InquirerPy.utils import (
+from InquirerPrompt.base import BaseSimplePrompt
+from InquirerPrompt.exceptions import InvalidArgument
+from InquirerPrompt.utils import (
     InquirerPyDefault,
     InquirerPyKeybindings,
     InquirerPyMessage,
@@ -65,7 +65,7 @@ class ConfirmPrompt(BaseSimplePrompt):
         output: Used internally and will be removed in future updates.
 
     Examples:
-        >>> from InquirerPy import inquirer
+        >>> from InquirerPrompt import inquirer
         >>> result = inquirer.confirm(message="Confirm?").execute()
         >>> print(result)
         True

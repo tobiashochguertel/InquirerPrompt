@@ -18,7 +18,7 @@ Checkout [Default Style](#default-style) for all available style classes to cust
 The entry point function {ref}`pages/prompt:prompt` has a parameter `style` which you can use to apply custom styling using {class}`dict`.
 
 ```
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 result = prompt(
     {"message": "Confirm order?", "type": "confirm", "default": False},
@@ -31,7 +31,7 @@ result = prompt(
 The parameter `style_override` can be used to remove all [Default Style](#default-style). Value is `True` by default.
 
 ```
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 result = prompt(
     {"message": "Confirm order?", "type": "confirm", "default": False},
