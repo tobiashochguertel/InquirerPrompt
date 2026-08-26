@@ -38,10 +38,10 @@ jobs:
           version: ${{ env.UV_VERSION }}
 
       - name: Install griffe
-        run: uv pip install "griffe>=1.0"
+        run: uv pip install --system "griffe>=1.0"
 
       - name: Install fork package (editable)
-        run: uv pip install -e .
+        run: uv pip install --system -e .
 
       - name: Run compatibility check
         id: compat
