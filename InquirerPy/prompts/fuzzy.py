@@ -325,6 +325,9 @@ class FuzzyPrompt(BaseListPrompt):
         mandatory: Indicate if the prompt is mandatory. If True, then the question cannot be skipped.
         mandatory_message: Error message to show when user attempts to skip mandatory prompt.
         session_result: Used internally for :ref:`index:Classic Syntax (PyInquirer)`.
+        erase_when_done: Clear the rendered prompt from the terminal after the application exits.
+            Useful when looping over multiple prompt instances (e.g. a refresh loop) to avoid
+            leaving ghost output from previous iterations on screen.
 
     Examples:
         >>> from InquirerPy import inquirer
@@ -366,6 +369,7 @@ class FuzzyPrompt(BaseListPrompt):
         mandatory: bool = True,
         mandatory_message: str = "Mandatory prompt",
         session_result: Optional[InquirerPySessionResult] = None,
+        erase_when_done: bool = False,
     ) -> None:
         if not keybindings:
             keybindings = {}
@@ -374,6 +378,7 @@ class FuzzyPrompt(BaseListPrompt):
         self._task = None
         self._rendered = False
         self._exact_symbol = exact_symbol
+        self._erase_when_done = erase_when_done
 
         keybindings = {
             "up": [{"key": "up"}, {"key": "c-p"}],
@@ -498,6 +503,7 @@ class FuzzyPrompt(BaseListPrompt):
             key_bindings=self._kb,
             editing_mode=self._editing_mode,
             after_render=self._after_render,
+            erase_when_done=self._erase_when_done,
         )
 
     def _toggle_exact(self, _, value: Optional[bool] = None) -> None:

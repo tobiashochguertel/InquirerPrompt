@@ -154,6 +154,9 @@ class ListPrompt(BaseListPrompt):
         mandatory: Indicate if the prompt is mandatory. If True, then the question cannot be skipped.
         mandatory_message: Error message to show when user attempts to skip mandatory prompt.
         session_result: Used internally for :ref:`index:Classic Syntax (PyInquirer)`.
+        erase_when_done: Clear the rendered prompt from the terminal after the application exits.
+            Useful when looping over multiple prompt instances (e.g. a refresh loop) to avoid
+            leaving ghost output from previous iterations on screen.
 
     Examples:
         >>> from InquirerPy import inquirer
@@ -192,6 +195,7 @@ class ListPrompt(BaseListPrompt):
         mandatory: bool = True,
         mandatory_message: str = "Mandatory prompt",
         session_result: Optional[InquirerPySessionResult] = None,
+        erase_when_done: bool = False,
     ) -> None:
         if not hasattr(self, "_content_control"):
             self.content_control = InquirerPyListControl(
@@ -226,6 +230,7 @@ class ListPrompt(BaseListPrompt):
             session_result=session_result,
         )
         self._show_cursor = show_cursor
+        self._erase_when_done = erase_when_done
         self._dimmension_height, self._dimmension_max_height = calculate_height(
             height, max_height, height_offset=self.height_offset
         )
@@ -282,6 +287,7 @@ class ListPrompt(BaseListPrompt):
             style=self._style,
             key_bindings=self._kb,
             after_render=self._after_render,
+            erase_when_done=self._erase_when_done,
         )
 
     def _get_prompt_message_with_cursor(self) -> List[Tuple[str, str]]:

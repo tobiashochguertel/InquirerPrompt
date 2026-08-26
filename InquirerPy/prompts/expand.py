@@ -262,6 +262,9 @@ class ExpandPrompt(ListPrompt):
         mandatory: Indicate if the prompt is mandatory. If True, then the question cannot be skipped.
         mandatory_message: Error message to show when user attempts to skip mandatory prompt.
         session_result: Used internally for :ref:`index:Classic Syntax (PyInquirer)`.
+        erase_when_done: Clear the rendered prompt from the terminal after the application exits.
+            Useful when looping over multiple prompt instances (e.g. a refresh loop) to avoid
+            leaving ghost output from previous iterations on screen.
 
     Examples:
         >>> from InquirerPy import inquirer
@@ -304,6 +307,7 @@ class ExpandPrompt(ListPrompt):
         mandatory: bool = True,
         mandatory_message: str = "Mandatory prompt",
         session_result: Optional[InquirerPySessionResult] = None,
+        erase_when_done: bool = False,
     ) -> None:
         if expand_help is None:
             expand_help = ExpandHelp(message=help_msg)
@@ -345,6 +349,7 @@ class ExpandPrompt(ListPrompt):
             mandatory=mandatory,
             mandatory_message=mandatory_message,
             session_result=session_result,
+            erase_when_done=erase_when_done,
         )
 
     def _on_rendered(self, _) -> None:
