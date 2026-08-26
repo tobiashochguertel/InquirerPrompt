@@ -108,6 +108,38 @@ name = inquirer.text(message="What's your name:").execute()
 confirm = inquirer.confirm(message="Confirm?").execute()
 ```
 
+### Colored Choices
+
+Choice names support `prompt_toolkit` formatted text objects (`HTML`, `ANSI`, `FormattedText`) for per-choice coloring. This works in all list-type prompts: `select`, `checkbox`, `rawlist`, `expand`, and `fuzzy`.
+
+```python
+from prompt_toolkit.formatted_text import HTML
+from InquirerPy import inquirer
+from InquirerPy.base.control import Choice
+
+result = inquirer.select(
+    message="Select a shell:",
+    choices=[
+        Choice("zsh", name=HTML("<ansibrightcyan>Zsh</ansibrightcyan>  <ansigreen>Search: ✓</ansigreen>  <ansigreen>AI: ✓</ansigreen>")),
+        Choice("bash", name=HTML("<ansibrightcyan>Bash</ansibrightcyan>  <ansigreen>Search: ✓</ansigreen>  <ansigreen>AI: ✓</ansigreen>")),
+        Choice("fish", name=HTML("<ansibrightcyan>Fish</ansibrightcyan>  <ansired>Search: ✗</ansired>  <ansired>AI: ✗</ansired>")),
+    ],
+    border=True,
+).execute()
+```
+
+ANSI escape codes are also supported via `prompt_toolkit.formatted_text.ANSI`:
+
+```python
+from prompt_toolkit.formatted_text import ANSI
+
+Choice("red", name=ANSI("\033[31m● Red\033[0m"))
+```
+
+Plain string choice names work as before — this feature is fully backward compatible.
+
+See the [Style](https://InquirerPrompt.readthedocs.io/en/latest/pages/style.html) documentation for available color classes and the `examples/colored_choices.py` demo script.
+
 <!-- start migration -->
 
 ## Migrating from PyInquirer
