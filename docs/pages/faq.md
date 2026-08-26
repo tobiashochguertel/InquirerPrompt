@@ -9,10 +9,10 @@
 Yes, especially for list type prompts with multiple selection, printing selection
 as a list is not ideal in a lot of scenarios. Use `transformer` parameter to customise it.
 
-## How can I do unittest when using `InquirerPy`?
+## How can I do unittest when using `InquirerPrompt`?
 
 ```{tip}
-Since `InquirerPy` module itself is tested, there's no need to mock any futher/deeper than the API entrypoint (`prompt` and `inquirer`).
+Since `InquirerPrompt` module itself is tested, there's no need to mock any futher/deeper than the API entrypoint (`prompt` and `inquirer`).
 ```
 
 For {ref}`index:Classic Syntax (PyInquirer)` user, it would be just a direct mock on the {ref}`pages/prompt:prompt` function.
@@ -80,7 +80,7 @@ This may be supported in the future but not a priority at the moment.
 
 ## Is InquirerPrompt compatible with kazhala/InquirerPy (upstream)?
 
-**Yes — InquirerPrompt is designed to be a drop-in replacement for the upstream `InquirerPy` package.**
+**Yes — InquirerPrompt is designed to be a drop-in replacement for the upstream `InquirerPrompt` package.**
 
 The import name is unchanged: `import InquirerPy` works exactly the same as before.
 Simply replace your `pip install InquirerPy` with `pip install InquirerPrompt` and nothing else needs to change.

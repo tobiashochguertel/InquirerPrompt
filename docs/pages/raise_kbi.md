@@ -1,7 +1,7 @@
 # Skip & KeyboardInterrupt
 
 Prior to version `0.3.0`, the parameter `raise_keyboard_interrupt` can control whether to raise the exception
-{class}`KeyboardInterrupt` when user hit `ctrl-c` or let `InquirerPy` handle the exception which will skip the prompt when
+{class}`KeyboardInterrupt` when user hit `ctrl-c` or let `InquirerPrompt` handle the exception which will skip the prompt when
 user hit `ctrl-c`. However this would cause issues when user actually want to terminate the program and also will have some side effects
 if future prompts depends on the result.
 

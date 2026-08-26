@@ -17,6 +17,7 @@ from InquirerPy.utils import (
     InquirerPySessionResult,
     InquirerPyStyle,
     InquirerPyValidate,
+    expand_formatted_text,
 )
 
 __all__ = ["ExpandPrompt", "ExpandHelp", "ExpandChoice"]
@@ -156,8 +157,10 @@ class InquirerPyExpandControl(InquirerPyUIListControl):
         else:
             display_choices = []
             display_choices.append(("class:pointer", self._expand_pointer))
-            display_choices.append(
-                ("", self.choices[self.selected_choice_index]["name"])
+            display_choices.extend(
+                expand_formatted_text(
+                    "", self.choices[self.selected_choice_index]["name"]
+                )
             )
         return display_choices
 
@@ -175,7 +178,7 @@ class InquirerPyExpandControl(InquirerPyUIListControl):
                 ("class:pointer", "%s%s" % (choice["key"], self._separator))
             )
         display_choices.append(("[SetCursorPosition]", ""))
-        display_choices.append(("class:pointer", choice["name"]))
+        display_choices.extend(expand_formatted_text("class:pointer", choice["name"]))
         return display_choices
 
     def _get_normal_text(self, choice) -> List[Tuple[str, str]]:
@@ -189,9 +192,9 @@ class InquirerPyExpandControl(InquirerPyUIListControl):
         )
         if not isinstance(choice["value"], Separator):
             display_choices.append(("", "%s%s" % (choice["key"], self._separator)))
-            display_choices.append(("", choice["name"]))
+            display_choices.extend(expand_formatted_text("", choice["name"]))
         else:
-            display_choices.append(("class:separator", choice["name"]))
+            display_choices.extend(expand_formatted_text("class:separator", choice["name"]))
         return display_choices
 
 
@@ -262,6 +265,9 @@ class ExpandPrompt(ListPrompt):
         mandatory: Indicate if the prompt is mandatory. If True, then the question cannot be skipped.
         mandatory_message: Error message to show when user attempts to skip mandatory prompt.
         session_result: Used internally for :ref:`index:Classic Syntax (PyInquirer)`.
+        erase_when_done: Clear the rendered prompt from the terminal after the application exits.
+            Useful when looping over multiple prompt instances (e.g. a refresh loop) to avoid
+            leaving ghost output from previous iterations on screen.
 
     Examples:
         >>> from InquirerPy import inquirer
@@ -304,6 +310,7 @@ class ExpandPrompt(ListPrompt):
         mandatory: bool = True,
         mandatory_message: str = "Mandatory prompt",
         session_result: Optional[InquirerPySessionResult] = None,
+        erase_when_done: bool = False,
     ) -> None:
         if expand_help is None:
             expand_help = ExpandHelp(message=help_msg)
@@ -345,6 +352,7 @@ class ExpandPrompt(ListPrompt):
             mandatory=mandatory,
             mandatory_message=mandatory_message,
             session_result=session_result,
+            erase_when_done=erase_when_done,
         )
 
     def _on_rendered(self, _) -> None:

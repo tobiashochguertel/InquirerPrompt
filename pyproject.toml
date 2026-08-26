@@ -19,7 +19,7 @@ description = "Python port of Inquirer.js — a collection of common interactive
 authors = ["Kevin Zhuang <kevin7441@gmail.com>"]
 maintainers = ["Tobias Hochgürtel <tobiashochguertel@users.noreply.github.com>"]
 readme = "README.md"
-repository = "https://github.com/tobiashochguertel/InquirerPy"
+repository = "https://github.com/tobiashochguertel/InquirerPrompt"
 documentation = "https://InquirerPrompt.readthedocs.io"
 license = "MIT"
 keywords = ["cli", "prompt-toolkit", "commandline", "inquirer", "development", "interactive", "prompt"]
@@ -89,7 +89,7 @@ tag_format = "v{version}"
 major_on_zero = false
 
 [tool.semantic_release.branches.main]
-match = "(master|main)"
+match = "main"
 
 [tool.semantic_release.changelog]
 changelog_file = "CHANGELOG.md"

@@ -95,6 +95,9 @@ class NumberPrompt(BaseComplexPrompt):
         mandatory: Indicate if the prompt is mandatory. If True, then the question cannot be skipped.
         mandatory_message: Error message to show when user attempts to skip mandatory prompt.
         session_result: Used internally for :ref:`index:Classic Syntax (PyInquirer)`.
+        erase_when_done: Clear the rendered prompt from the terminal after the application exits.
+            Useful when looping over multiple prompt instances (e.g. a refresh loop) to avoid
+            leaving ghost output from previous iterations on screen.
 
     Examples:
         >>> from InquirerPy import inquirer
@@ -128,6 +131,7 @@ class NumberPrompt(BaseComplexPrompt):
         mandatory: bool = True,
         mandatory_message: str = "Mandatory prompt",
         session_result: Optional[InquirerPySessionResult] = None,
+        erase_when_done: bool = False,
     ) -> None:
         super().__init__(
             message=message,
@@ -157,6 +161,7 @@ class NumberPrompt(BaseComplexPrompt):
         self._whole_replace = False
         self._integral_replace = False
         self._replace_mode = replace_mode
+        self._erase_when_done = erase_when_done
 
         self._leading_zero_pattern = re.compile(r"^(0*)[0-9]+.*")
         self._sn_pattern = re.compile(r"^.*E-.*")
@@ -329,6 +334,7 @@ class NumberPrompt(BaseComplexPrompt):
             key_bindings=self._kb,
             after_render=self._after_render,
             editing_mode=self._editing_mode,
+            erase_when_done=self._erase_when_done,
         )
 
     def _fix_sn(self, value: str) -> Tuple[str, str]:

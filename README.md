@@ -1,14 +1,14 @@
-# InquirerPy (published as **InquirerPrompt**)
+# InquirerPrompt
 
 > **🍴 Community-Maintained Fork**
 >
 > This is a community fork of [kazhala/InquirerPy](https://github.com/kazhala/InquirerPy), maintained at
-> [`tobiashochguertel/InquirerPy`](https://github.com/tobiashochguertel/InquirerPy).
+> [`tobiashochguertel/InquirerPrompt`](https://github.com/tobiashochguertel/InquirerPrompt).
 >
 > The original project is a fantastic library that we rely on and deeply appreciate. Unfortunately the upstream
 > has been quiet for some time, and the community has accumulated valuable bug fixes, compatibility updates,
 > and feature contributions that have not been reviewed or merged. Rather than letting those improvements go to
-> waste, we decided to maintain this fork so that InquirerPy stays healthy and up-to-date for everyone.
+> waste, we decided to maintain this fork so that InquirerPrompt stays healthy and up-to-date for everyone.
 >
 > **Our goal is to contribute all improvements back upstream** — if the original author becomes active again
 > we will happily defer to them. Until then, we are keeping the lights on here. 🙏
@@ -16,7 +16,7 @@
 > | Item | Detail |
 > |------|--------|
 > | Upstream | [kazhala/InquirerPy](https://github.com/kazhala/InquirerPy) @ `0.3.4` (last commit Nov 2022) |
-> | This fork | [tobiashochguertel/InquirerPy](https://github.com/tobiashochguertel/InquirerPy) |
+> | This fork | [tobiashochguertel/InquirerPrompt](https://github.com/tobiashochguertel/InquirerPrompt) |
 > | Install | `pip install InquirerPrompt` (import still: `import InquirerPy`) |
 > | Docs | [InquirerPrompt.readthedocs.io](https://InquirerPrompt.readthedocs.io) |
 >
@@ -25,8 +25,8 @@
 
 ---
 
-[![CI](https://github.com/tobiashochguertel/InquirerPy/workflows/CI/badge.svg)](https://github.com/tobiashochguertel/InquirerPy/actions?query=workflow%3ACI)
-[![Coverage](https://codecov.io/gh/tobiashochguertel/InquirerPy/branch/main/graph/badge.svg)](https://codecov.io/gh/tobiashochguertel/InquirerPy)
+[![CI](https://github.com/tobiashochguertel/InquirerPrompt/workflows/CI/badge.svg)](https://github.com/tobiashochguertel/InquirerPrompt/actions?query=workflow%3ACI)
+[![Coverage](https://codecov.io/gh/tobiashochguertel/InquirerPrompt/branch/main/graph/badge.svg)](https://codecov.io/gh/tobiashochguertel/InquirerPrompt)
 [![Version](https://img.shields.io/pypi/pyversions/InquirerPrompt?style=flat-square)](https://pypi.org/project/InquirerPrompt/)
 [![PyPi](https://img.shields.io/pypi/v/InquirerPrompt?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/InquirerPrompt/)
 [![Upstream](https://img.shields.io/badge/upstream-kazhala%2FInquirerPy-blue)](https://github.com/kazhala/InquirerPy)
@@ -108,6 +108,53 @@ name = inquirer.text(message="What's your name:").execute()
 confirm = inquirer.confirm(message="Confirm?").execute()
 ```
 
+### Colored Choices
+
+Choice names support `prompt_toolkit` formatted text objects (`HTML`, `ANSI`, `FormattedText`) for per-choice coloring. This works in all list-type prompts: `select`, `checkbox`, `rawlist`, `expand`, and `fuzzy`.
+
+```python
+from prompt_toolkit.formatted_text import HTML
+from InquirerPy import inquirer
+from InquirerPy.base.control import Choice
+
+result = inquirer.select(
+    message="Select a shell:",
+    choices=[
+        Choice("zsh", name=HTML("<ansibrightcyan>Zsh</ansibrightcyan>  <ansigreen>Search: ✓</ansigreen>  <ansigreen>AI: ✓</ansigreen>")),
+        Choice("bash", name=HTML("<ansibrightcyan>Bash</ansibrightcyan>  <ansigreen>Search: ✓</ansigreen>  <ansigreen>AI: ✓</ansigreen>")),
+        Choice("fish", name=HTML("<ansibrightcyan>Fish</ansibrightcyan>  <ansired>Search: ✗</ansired>  <ansired>AI: ✗</ansired>")),
+    ],
+    border=True,
+).execute()
+```
+
+ANSI escape codes are also supported via `prompt_toolkit.formatted_text.ANSI`:
+
+```python
+from prompt_toolkit.formatted_text import ANSI
+
+Choice("red", name=ANSI("\033[31m● Red\033[0m"))
+```
+
+Plain string choice names work as before — this feature is fully backward compatible.
+
+See the [Style](https://InquirerPrompt.readthedocs.io/en/latest/pages/style.html) documentation for available color classes and the `examples/colored_choices.py` demo script.
+
+### Erase When Done
+
+All list-type prompts (`select`, `checkbox`, `rawlist`, `expand`, `fuzzy`, `number`) accept an `erase_when_done` parameter. When `True`, the prompt UI is erased from the terminal after the user answers — useful when prompts are used in a loop to avoid ghost lines accumulating.
+
+```python
+from InquirerPy import inquirer
+
+result = inquirer.select(
+    message="Pick one:",
+    choices=["a", "b", "c"],
+    erase_when_done=True,
+).execute()
+# Terminal output is clean — no prompt artifacts left behind
+```
+
 <!-- start migration -->
 
 ## Migrating from PyInquirer
@@ -173,4 +220,4 @@ This project is based on the great work done by the following projects & their a
 
 ## License
 
-This project is licensed under [MIT](https://github.com/tobiashochguertel/InquirerPy/blob/main/LICENSE).
+This project is licensed under [MIT](https://github.com/tobiashochguertel/InquirerPrompt/blob/main/LICENSE).

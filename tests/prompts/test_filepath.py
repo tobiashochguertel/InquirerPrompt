@@ -29,7 +29,10 @@ class TestFilePath(unittest.TestCase):
         self.create_temp_files()
 
     def tearDown(self):
-        self.inp.close()
+        try:
+            self.inp.close()
+        except AttributeError:
+            pass
         shutil.rmtree(self.test_dir)
 
     @contextmanager

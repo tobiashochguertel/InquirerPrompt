@@ -15,6 +15,7 @@ from InquirerPy.utils import (
     InquirerPySessionResult,
     InquirerPyStyle,
     InquirerPyValidate,
+    expand_formatted_text,
 )
 
 __all__ = ["RawlistPrompt"]
@@ -88,7 +89,7 @@ class InquirerPyRawlistControl(InquirerPyUIListControl):
                 )
             )
         display_choices.append(("[SetCursorPosition]", ""))
-        display_choices.append(("class:pointer", choice["name"]))
+        display_choices.extend(expand_formatted_text("class:pointer", choice["name"]))
         return display_choices
 
     def _get_normal_text(self, choice) -> List[Tuple[str, str]]:
@@ -104,9 +105,9 @@ class InquirerPyRawlistControl(InquirerPyUIListControl):
             display_choices.append(
                 ("", "%s%s" % (str(choice["display_index"]), self._separator))
             )
-            display_choices.append(("", choice["name"]))
+            display_choices.extend(expand_formatted_text("", choice["name"]))
         else:
-            display_choices.append(("class:separator", choice["name"]))
+            display_choices.extend(expand_formatted_text("class:separator", choice["name"]))
         return display_choices
 
 

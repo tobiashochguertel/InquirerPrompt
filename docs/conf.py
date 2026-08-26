@@ -24,7 +24,7 @@ templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 html_theme = "furo"
-html_title = "InquirerPy"
+html_title = "InquirerPrompt"
 
 napoleon_include_init_with_doc = True
 autosectionlabel_prefix_document = True
