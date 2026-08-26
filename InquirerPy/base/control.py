@@ -4,7 +4,7 @@ from abc import abstractmethod
 from dataclasses import asdict, dataclass
 from typing import Any, Callable, Dict, List, Optional, Tuple, cast
 
-from prompt_toolkit.formatted_text import HTML, ANSI, FormattedText
+from prompt_toolkit.formatted_text import ANSI, HTML, FormattedText
 from prompt_toolkit.layout.controls import FormattedTextControl
 
 from InquirerPy.exceptions import InvalidArgument, RequiredKeyNotFound

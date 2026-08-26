@@ -298,9 +298,7 @@ def color_print(
         _print()
 
 
-def expand_formatted_text(
-    style: str, name: Any
-) -> StyleAndTextTuples:
+def expand_formatted_text(style: str, name: Any) -> StyleAndTextTuples:
     """Expand a choice name into formatted text tuples.
 
     If ``name`` is a plain :class:`str`, it is wrapped in a single
