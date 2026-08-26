@@ -4,6 +4,7 @@ from abc import abstractmethod
 from dataclasses import asdict, dataclass
 from typing import Any, Callable, Dict, List, Optional, Tuple, cast
 
+from prompt_toolkit.formatted_text import HTML, ANSI, FormattedText
 from prompt_toolkit.layout.controls import FormattedTextControl
 
 from InquirerPy.exceptions import InvalidArgument, RequiredKeyNotFound
@@ -24,12 +25,16 @@ class Choice:
         value: The value of the choice when user selects this choice.
         name: The value that should be presented to the user prior/after selection of the choice.
             This value is optional, if not provided, it will fallback to the string representation of `value`.
+            Can also be a :class:`prompt_toolkit.formatted_text.HTML`,
+            :class:`prompt_toolkit.formatted_text.ANSI`, or
+            :class:`prompt_toolkit.formatted_text.FormattedText` instance
+            for per-choice coloring.
         enabled: Indicates if the choice should be pre-selected.
             This only has effects when the prompt has `multiselect` enabled.
     """
 
     value: Any
-    name: Optional[str] = None
+    name: Any = None
     enabled: bool = False
 
     def __post_init__(self):
@@ -94,9 +99,16 @@ class InquirerPyUIListControl(FormattedTextControl):
                 if isinstance(choice, dict):
                     if choice["value"] == default:
                         self.selected_choice_index = index
+                    # Preserve formatted text objects (HTML/ANSI/FormattedText)
+                    # as choice names; only stringify plain values.
+                    raw_name = choice["name"]
+                    if isinstance(raw_name, (HTML, ANSI, FormattedText)):
+                        name = raw_name
+                    else:
+                        name = str(raw_name)
                     processed_choices.append(
                         {
-                            "name": str(choice["name"]),
+                            "name": name,
                             "value": choice["value"],
                             "enabled": (
                                 choice.get("enabled", False)

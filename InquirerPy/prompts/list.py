@@ -34,6 +34,7 @@ from InquirerPy.utils import (
     InquirerPyStyle,
     InquirerPyValidate,
     calculate_height,
+    expand_formatted_text,
 )
 
 if TYPE_CHECKING:
@@ -78,7 +79,7 @@ class InquirerPyListControl(InquirerPyUIListControl):
             )
         )
         display_choices.append(("[SetCursorPosition]", ""))
-        display_choices.append(("class:pointer", choice["name"]))
+        display_choices.extend(expand_formatted_text("class:pointer", choice["name"]))
         return display_choices
 
     def _get_normal_text(self, choice) -> List[Tuple[str, str]]:
@@ -91,9 +92,9 @@ class InquirerPyListControl(InquirerPyUIListControl):
             )
         )
         if not isinstance(choice["value"], Separator):
-            display_choices.append(("", choice["name"]))
+            display_choices.extend(expand_formatted_text("", choice["name"]))
         else:
-            display_choices.append(("class:separator", choice["name"]))
+            display_choices.extend(expand_formatted_text("class:separator", choice["name"]))
         return display_choices
 
 

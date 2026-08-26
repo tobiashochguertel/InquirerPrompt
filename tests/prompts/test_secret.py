@@ -19,7 +19,10 @@ class TestSecret(unittest.TestCase):
         self.inp = create_pipe_input()
 
     def tearDown(self):
-        self.inp.close()
+        try:
+            self.inp.close()
+        except AttributeError:
+            pass
 
     def test_prompt_result(self):
         self.inp.send_text("what\n")

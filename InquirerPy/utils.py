@@ -18,7 +18,13 @@ from typing import (
 from prompt_toolkit import print_formatted_text
 from prompt_toolkit.application import run_in_terminal
 from prompt_toolkit.application.current import get_app
-from prompt_toolkit.formatted_text import FormattedText
+from prompt_toolkit.formatted_text import (
+    ANSI,
+    HTML,
+    FormattedText,
+    StyleAndTextTuples,
+    to_formatted_text,
+)
 from prompt_toolkit.styles import Style
 from prompt_toolkit.validation import Validator
 
@@ -35,6 +41,7 @@ __all__ = [
     "InquirerPyStyle",
     "patched_print",
     "color_print",
+    "expand_formatted_text",
 ]
 
 
@@ -289,3 +296,44 @@ def color_print(
         run_in_terminal(_print)
     else:
         _print()
+
+
+def expand_formatted_text(
+    style: str, name: Any
+) -> StyleAndTextTuples:
+    """Expand a choice name into formatted text tuples.
+
+    If ``name`` is a plain :class:`str`, it is wrapped in a single
+    ``(style, name)`` tuple — the original InquirerPy behaviour.
+
+    If ``name`` is a :class:`prompt_toolkit.formatted_text.HTML`,
+    :class:`prompt_toolkit.formatted_text.ANSI`, or
+    :class:`prompt_toolkit.formatted_text.FormattedText` instance, it is
+    expanded via :func:`to_formatted_text` into a list of
+    ``(style, text)`` tuples. The outer ``style`` is **not** applied to
+    expanded fragments — each fragment keeps its own style from the markup.
+
+    This enables per-choice coloring::
+
+        from prompt_toolkit.formatted_text import HTML
+        from InquirerPy.base.control import Choice
+
+        choices = [
+            Choice("ok", name=HTML("<ansigreen>✓ OK</ansigreen>")),
+            Choice("no", name=HTML("<ansired>✗ No</ansired>")),
+        ]
+
+    Args:
+        style: The default style class (e.g. ``"class:pointer"``) to use
+            when ``name`` is a plain string.
+        name: The choice name — either a plain string or a prompt_toolkit
+            formatted text object (``HTML``, ``ANSI``, ``FormattedText``).
+
+    Returns:
+        A list of ``(style, text)`` tuples suitable for appending to a
+        ``display_choices`` list.
+    """
+    if isinstance(name, str):
+        return [(style, name)]
+    # HTML, ANSI, FormattedText — expand into individual (style, text) tuples
+    return list(to_formatted_text(name))

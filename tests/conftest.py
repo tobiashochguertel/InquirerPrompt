@@ -28,4 +28,9 @@ def patch_terminal_for_tests():
         with create_app_session(input=inp, output=DummyOutput()):
             yield inp
     finally:
-        inp.close()
+        try:
+            inp.close()
+        except AttributeError:
+            # prompt_toolkit >= 3.0.40: create_pipe_input() returns a
+            # context manager; closing is handled by __exit__.
+            pass
