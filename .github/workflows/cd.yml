@@ -52,9 +52,9 @@ jobs:
             echo "released=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Run semantic-release
+      - name: Run semantic-release version
         if: steps.check.outputs.released == 'true'
-        run: uv run semantic-release -vv publish
+        run: uv run semantic-release -vv version
         env:
           GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
 
@@ -64,3 +64,9 @@ jobs:
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
           packages-dir: dist/
+
+      - name: Upload dist artifacts to GitHub release
+        if: steps.check.outputs.released == 'true'
+        run: uv run semantic-release -vv publish
+        env:
+          GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
