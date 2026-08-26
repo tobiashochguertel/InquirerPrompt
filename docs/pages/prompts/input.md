@@ -59,7 +59,7 @@ Below is a simple {class}`dict` completer.
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 completer = {
     "hello": {
@@ -90,7 +90,7 @@ result = prompt(questions=questions)
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 completer = {
     "hello": {
@@ -119,7 +119,7 @@ While `multiline` is `True`, `enter` will causing a new line to be used instead 
 `esc` and then press `enter` to finish answer the question.
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.text(message="FooBoo:", multiline=True).execute()
 ```

@@ -7,10 +7,10 @@ from prompt_toolkit.input import create_pipe_input
 from prompt_toolkit.output import DummyOutput
 from prompt_toolkit.shortcuts.prompt import CompleteStyle
 
-from InquirerPy.exceptions import InvalidArgument
-from InquirerPy.prompts.secret import SecretPrompt
-from InquirerPy.utils import InquirerPyStyle
-from InquirerPy.validator import PasswordValidator
+from InquirerPrompt.exceptions import InvalidArgument
+from InquirerPrompt.prompts.secret import SecretPrompt
+from InquirerPrompt.utils import InquirerPyStyle
+from InquirerPrompt.validator import PasswordValidator
 from tests.style import get_sample_style
 
 
@@ -104,11 +104,11 @@ class TestSecret(unittest.TestCase):
             ],
         )
 
-    @patch("InquirerPy.prompts.input.SimpleLexer")
-    @patch("InquirerPy.prompts.secret.SecretPrompt._get_prompt_message")
-    @patch("InquirerPy.base.simple.Style.from_dict")
-    @patch("InquirerPy.base.simple.KeyBindings")
-    @patch("InquirerPy.prompts.input.PromptSession")
+    @patch("InquirerPrompt.prompts.input.SimpleLexer")
+    @patch("InquirerPrompt.prompts.secret.SecretPrompt._get_prompt_message")
+    @patch("InquirerPrompt.base.simple.Style.from_dict")
+    @patch("InquirerPrompt.base.simple.KeyBindings")
+    @patch("InquirerPrompt.prompts.input.PromptSession")
     def test_callable_called(
         self,
         MockedSession,

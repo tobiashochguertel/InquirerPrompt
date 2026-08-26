@@ -53,7 +53,7 @@ For this specific prompt, a dedicated class {class}`~InquirerPy.prompts.expand.E
 ```
 
 ```{code-block}
-from InquirerPy.prompts.expand import ExpandChoice
+from InquirerPrompt.prompts.expand import ExpandChoice
 
 choices = [
     ExpandChoice("Apple", key="a"),
@@ -128,8 +128,8 @@ The following example will change the expansion key to `o` and the help message 
   <summary>Classic Syntax (PyInquirer)</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
-from InquirerPy.prompts.expand import ExpandHelp
+from InquirerPrompt import prompt
+from InquirerPrompt.prompts.expand import ExpandHelp
 
 questions = [
     {
@@ -149,8 +149,8 @@ result = prompt(questions=questions)
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
-from InquirerPy.prompts.expand import ExpandHelp
+from InquirerPrompt import inquirer
+from InquirerPrompt.prompts.expand import ExpandHelp
 
 result = inquirer.expand(
     message="Select one:",

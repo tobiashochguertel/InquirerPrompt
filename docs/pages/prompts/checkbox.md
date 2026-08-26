@@ -36,7 +36,7 @@ In checkbox prompt, the `multiselct` option is always enabled. If you want any c
 use {class}`~InquirerPy.base.control.Choice` to create choices and set `enabled` to True.
 
 ```{code-block} python
-from InquirerPy.base import Choice
+from InquirerPrompt.base import Choice
 
 choices = [
     Choice("selected", enabled=True),
@@ -79,7 +79,7 @@ It should be the value of one of the choices.
 If you wish to pre-select certain choices, you can leverage the `enabled` parameter/key of each choice.
 
 ```{code-block} python
-from InquirerPy.base import Choice
+from InquirerPrompt.base import Choice
 
 choices = [
     Choice(1, enabled=True),  # enabled by default

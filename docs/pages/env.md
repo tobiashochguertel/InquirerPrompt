@@ -22,8 +22,8 @@ ENV -> `style` parameter -> default style
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
-from InquirerPy import get_style
+from InquirerPrompt import prompt
+from InquirerPrompt import get_style
 
 # before
 result = prompt(questions=[{"type": "confirm", "message": "Confirm?"}], style={"questionmark": "#ffffff"})
@@ -40,8 +40,8 @@ result = prompt(questions=[{"type": "confirm", "message": "Confirm?"}])
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
-from InquirerPy import get_style
+from InquirerPrompt import inquirer
+from InquirerPrompt import get_style
 
 # before
 result = inquirer.confirm(message="Confirm?", style=get_style({"questionmark": "#ffffff"})).execute()
@@ -94,7 +94,7 @@ ENV -> `vi_mode` parameter
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 # before
 result = prompt(questions=[{"type": "input", "message": "Name:"}], vi_mode=True)
@@ -111,7 +111,7 @@ result = prompt(questions=[{"type": "input", "message": "Name:"}])
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 # before
 result = inquirer.text(message="Name:", vi_mode=True).execute()
@@ -151,7 +151,7 @@ ENV -> `raise_keyboard_interrupt` parameter
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 # before
 result = prompt(questions=[{"type": "secret", "message": "Password:"}], raise_keyboard_interrupt=False)
@@ -168,7 +168,7 @@ result = prompt(questions=[{"type": "secret", "message": "Password:"}])
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 # before
 result = inquirer.text(message="Name:", vi_mode=True).execute(raise_keyboard_interrupt=False)

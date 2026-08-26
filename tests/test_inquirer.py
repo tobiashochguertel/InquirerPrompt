@@ -1,8 +1,8 @@
 import re
 import unittest
 
-from InquirerPy import inquirer
-from InquirerPy.resolver import question_mapping
+from InquirerPrompt import inquirer
+from InquirerPrompt.resolver import question_mapping
 
 
 class TestInquirer(unittest.TestCase):

@@ -35,15 +35,15 @@ from prompt_toolkit.lexers.base import SimpleLexer
 from prompt_toolkit.validation import ValidationError
 from prompt_toolkit.widgets.base import Frame
 
-from InquirerPy.base import FakeDocument, InquirerPyUIListControl
-from InquirerPy.base.list import BaseListPrompt
-from InquirerPy.containers.instruction import InstructionWindow
-from InquirerPy.containers.message import MessageWindow
-from InquirerPy.containers.validation import ValidationFloat
-from InquirerPy.enum import INQUIRERPY_POINTER_SEQUENCE
-from InquirerPy.exceptions import InvalidArgument
-from InquirerPy.separator import Separator
-from InquirerPy.utils import (
+from InquirerPrompt.base import FakeDocument, InquirerPyUIListControl
+from InquirerPrompt.base.list import BaseListPrompt
+from InquirerPrompt.containers.instruction import InstructionWindow
+from InquirerPrompt.containers.message import MessageWindow
+from InquirerPrompt.containers.validation import ValidationFloat
+from InquirerPrompt.enum import INQUIRERPY_POINTER_SEQUENCE
+from InquirerPrompt.exceptions import InvalidArgument
+from InquirerPrompt.separator import Separator
+from InquirerPrompt.utils import (
     InquirerPyDefault,
     InquirerPyKeybindings,
     InquirerPyListChoices,
@@ -345,7 +345,7 @@ class FuzzyPrompt(BaseListPrompt):
             leaving ghost output from previous iterations on screen.
 
     Examples:
-        >>> from InquirerPy import inquirer
+        >>> from InquirerPrompt import inquirer
         >>> result = inquirer.fuzzy(message="Select one:", choices=[1, 2, 3]).execute()
         >>> print(result)
         1

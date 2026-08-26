@@ -1,6 +1,6 @@
-from InquirerPy import prompt
-from InquirerPy.prompts.expand import ExpandChoice
-from InquirerPy.separator import Separator
+from InquirerPrompt import prompt
+from InquirerPrompt.prompts.expand import ExpandChoice
+from InquirerPrompt.separator import Separator
 
 
 def question1_choice(_):

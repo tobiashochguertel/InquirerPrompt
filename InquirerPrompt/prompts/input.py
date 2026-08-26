@@ -11,10 +11,10 @@ from prompt_toolkit.lexers import SimpleLexer
 from prompt_toolkit.shortcuts.prompt import CompleteStyle, PromptSession
 from prompt_toolkit.validation import ValidationError
 
-from InquirerPy.base import BaseSimplePrompt
-from InquirerPy.enum import INQUIRERPY_POINTER_SEQUENCE
-from InquirerPy.exceptions import InvalidArgument
-from InquirerPy.utils import (
+from InquirerPrompt.base import BaseSimplePrompt
+from InquirerPrompt.enum import INQUIRERPY_POINTER_SEQUENCE
+from InquirerPrompt.exceptions import InvalidArgument
+from InquirerPrompt.utils import (
     InquirerPyDefault,
     InquirerPyKeybindings,
     InquirerPyMessage,
@@ -77,7 +77,7 @@ class InputPrompt(BaseSimplePrompt):
         output: Used internally and will be removed in future updates.
 
     Examples:
-        >>> from InquirerPy import inquirer
+        >>> from InquirerPrompt import inquirer
         >>> result = inquirer.text(message="Enter your name:").execute()
         >>> print(f"Name: {result}")
         Name: Michael

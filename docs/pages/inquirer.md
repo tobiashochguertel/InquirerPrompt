@@ -35,7 +35,7 @@ individual prompt documentation for prompt specific usage.
 Each prompt contains a function `execute` to start the prompt.
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 def main():
   result = inquirer.text(message="Name:").execute()
@@ -50,7 +50,7 @@ Each prompt contains a function `execute_async` to start the prompt asynchronous
 
 ```{code-block} python
 import asyncio
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 async def main():
   result = await inquirer.text(message="Name:").execute_async()

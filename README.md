@@ -17,7 +17,7 @@
 > |------|--------|
 > | Upstream | [kazhala/InquirerPy](https://github.com/kazhala/InquirerPy) @ `0.3.4` (last commit Nov 2022) |
 > | This fork | [tobiashochguertel/InquirerPrompt](https://github.com/tobiashochguertel/InquirerPrompt) |
-> | Install | `pip install InquirerPrompt` (import still: `import InquirerPy`) |
+> | Install | `pip install InquirerPrompt` (import: `import InquirerPrompt`) |
 > | Docs | [InquirerPrompt.readthedocs.io](https://InquirerPrompt.readthedocs.io) |
 >
 > If you are the original author and would like to resume ownership or collaborate, please open an issue — we
@@ -88,7 +88,7 @@ pip3 install InquirerPrompt
 #### Classic Syntax (PyInquirer)
 
 ```python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 questions = [
     {"type": "input", "message": "What's your name:", "name": "name"},
@@ -102,7 +102,7 @@ confirm = result["confirm"]
 #### Alternate Syntax
 
 ```python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 name = inquirer.text(message="What's your name:").execute()
 confirm = inquirer.confirm(message="Confirm?").execute()
@@ -114,8 +114,8 @@ Choice names support `prompt_toolkit` formatted text objects (`HTML`, `ANSI`, `F
 
 ```python
 from prompt_toolkit.formatted_text import HTML
-from InquirerPy import inquirer
-from InquirerPy.base.control import Choice
+from InquirerPrompt import inquirer
+from InquirerPrompt.base.control import Choice
 
 result = inquirer.select(
     message="Select a shell:",
@@ -145,7 +145,7 @@ See the [Style](https://InquirerPrompt.readthedocs.io/en/latest/pages/style.html
 All list-type prompts (`select`, `checkbox`, `rawlist`, `expand`, `fuzzy`, `number`) accept an `erase_when_done` parameter. When `True`, the prompt UI is erased from the terminal after the user answers — useful when prompts are used in a loop to avoid ghost lines accumulating.
 
 ```python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.select(
     message="Pick one:",

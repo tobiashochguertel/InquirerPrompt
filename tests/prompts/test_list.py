@@ -1,11 +1,14 @@
 import unittest
 from unittest.mock import patch
 
-from InquirerPy.enum import INQUIRERPY_KEYBOARD_INTERRUPT, INQUIRERPY_POINTER_SEQUENCE
-from InquirerPy.exceptions import InvalidArgument, RequiredKeyNotFound
-from InquirerPy.prompts.list import InquirerPyListControl, ListPrompt
-from InquirerPy.separator import Separator
-from InquirerPy.utils import InquirerPyStyle
+from InquirerPrompt.enum import (
+    INQUIRERPY_KEYBOARD_INTERRUPT,
+    INQUIRERPY_POINTER_SEQUENCE,
+)
+from InquirerPrompt.exceptions import InvalidArgument, RequiredKeyNotFound
+from InquirerPrompt.prompts.list import InquirerPyListControl, ListPrompt
+from InquirerPrompt.separator import Separator
+from InquirerPrompt.utils import InquirerPyStyle
 
 
 class TestListPrompt(unittest.TestCase):
@@ -157,7 +160,7 @@ class TestListPrompt(unittest.TestCase):
             prompt._handle_enter(event)
             self.assertEqual(prompt.status["result"], ["haah"])
 
-    @patch("InquirerPy.base.complex.Application.run")
+    @patch("InquirerPrompt.base.complex.Application.run")
     def test_prompt_execute(self, mocked_run):
         mocked_run.return_value = "hello"
         result = ListPrompt("hello world", ["yes", "no"]).execute()

@@ -78,7 +78,7 @@ to answer the question with True/False.
   <summary>Classic Syntax (PyInquirer)</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 questions = [
   {
@@ -100,7 +100,7 @@ result = prompt(questions=questions)
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 inquirer.confirm(
     message="Proceed?",

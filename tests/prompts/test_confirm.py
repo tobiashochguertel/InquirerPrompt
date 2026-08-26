@@ -6,9 +6,9 @@ from prompt_toolkit.input.defaults import create_pipe_input
 from prompt_toolkit.output import DummyOutput
 from prompt_toolkit.shortcuts.prompt import PromptSession
 
-from InquirerPy.enum import INQUIRERPY_KEYBOARD_INTERRUPT
-from InquirerPy.prompts.confirm import ConfirmPrompt
-from InquirerPy.utils import InquirerPyStyle
+from InquirerPrompt.enum import INQUIRERPY_KEYBOARD_INTERRUPT
+from InquirerPrompt.prompts.confirm import ConfirmPrompt
+from InquirerPrompt.utils import InquirerPyStyle
 
 
 class TestConfirmPrompt(unittest.TestCase):
@@ -235,10 +235,10 @@ class TestConfirmPrompt(unittest.TestCase):
             ],
         )
 
-    @patch("InquirerPy.prompts.confirm.ConfirmPrompt._get_prompt_message")
-    @patch("InquirerPy.base.simple.Style.from_dict")
-    @patch("InquirerPy.base.simple.KeyBindings")
-    @patch("InquirerPy.prompts.confirm.PromptSession")
+    @patch("InquirerPrompt.prompts.confirm.ConfirmPrompt._get_prompt_message")
+    @patch("InquirerPrompt.base.simple.Style.from_dict")
+    @patch("InquirerPrompt.base.simple.KeyBindings")
+    @patch("InquirerPrompt.prompts.confirm.PromptSession")
     def test_callable_called(
         self, MockedSession, MockedKeyBindings, MockedStyle, mocked_message
     ):

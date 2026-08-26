@@ -1,10 +1,10 @@
 import unittest
 
-from InquirerPy.base.control import Choice
-from InquirerPy.enum import INQUIRERPY_POINTER_SEQUENCE
-from InquirerPy.exceptions import InvalidArgument, RequiredKeyNotFound
-from InquirerPy.prompts.list import InquirerPyListControl
-from InquirerPy.separator import Separator
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.enum import INQUIRERPY_POINTER_SEQUENCE
+from InquirerPrompt.exceptions import InvalidArgument, RequiredKeyNotFound
+from InquirerPrompt.prompts.list import InquirerPyListControl
+from InquirerPrompt.separator import Separator
 
 
 class TestBaseControl(unittest.TestCase):
