@@ -311,10 +311,13 @@ def expand_formatted_text(style: str, name: Any) -> StyleAndTextTuples:
     :class:`prompt_toolkit.formatted_text.ANSI`, or
     :class:`prompt_toolkit.formatted_text.FormattedText` instance, it is
     expanded via :func:`to_formatted_text` into a list of
-    ``(style, text)`` tuples. The outer ``style`` is **not** applied to
-    expanded fragments — each fragment keeps its own style from the markup.
+    ``(style, text)`` tuples. The outer ``style`` is **merged** with each
+    fragment's own style — the fragment's foreground/background takes
+    precedence, but class-based attributes (e.g. ``class:pointer`` with a
+    background colour) are inherited.
 
-    This enables per-choice coloring::
+    This enables per-choice coloring while still allowing the pointer/hover
+    style's background to apply to the full row::
 
         from prompt_toolkit.formatted_text import HTML
         from InquirerPrompt.base.control import Choice
@@ -326,7 +329,8 @@ def expand_formatted_text(style: str, name: Any) -> StyleAndTextTuples:
 
     Args:
         style: The default style class (e.g. ``"class:pointer"``) to use
-            when ``name`` is a plain string.
+            when ``name`` is a plain string, or to merge with each fragment's
+            style when ``name`` is a formatted text object.
         name: The choice name — either a plain string or a prompt_toolkit
             formatted text object (``HTML``, ``ANSI``, ``FormattedText``).
 
@@ -337,4 +341,19 @@ def expand_formatted_text(style: str, name: Any) -> StyleAndTextTuples:
     if isinstance(name, str):
         return [(style, name)]
     # HTML, ANSI, FormattedText — expand into individual (style, text) tuples
-    return list(to_formatted_text(name))
+    fragments = list(to_formatted_text(name))
+    if not style:
+        return fragments
+    # Merge the outer style (e.g. "class:pointer") with each fragment's style
+    # so that background/class attributes from the outer style are inherited
+    # while the fragment's own fg/bg still takes precedence.
+    result: StyleAndTextTuples = []
+    for item in fragments:
+        frag_style = item[0]
+        text = item[1]
+        if frag_style:
+            merged = f"{style} {frag_style}"
+        else:
+            merged = style
+        result.append((merged, text))
+    return result
