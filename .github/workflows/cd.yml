@@ -20,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     # Only run on non-fork repositories
     if: github.repository_owner == 'tobiashochguertel'
-    concurrency: release
     steps:
       - uses: actions/checkout@v4
         with:
