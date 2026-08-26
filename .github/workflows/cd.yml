@@ -54,7 +54,7 @@ jobs:
 
       - name: Run semantic-release
         if: steps.check.outputs.released == 'true'
-        run: uv run semantic-release -vv version
+        run: uv run semantic-release -vv publish
         env:
           GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
 
@@ -64,11 +64,3 @@ jobs:
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
           packages-dir: dist/
-
-      - name: Publish to GitHub Releases
-        if: steps.check.outputs.released == 'true'
-        run: |
-          TAG="${{ steps.check.outputs.tag }}"
-          gh release create "$TAG" --generate-notes --title "$TAG"
-        env:
-          GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
