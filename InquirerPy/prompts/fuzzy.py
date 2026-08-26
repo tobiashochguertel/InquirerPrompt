@@ -31,6 +31,7 @@ from prompt_toolkit.layout.dimension import Dimension, LayoutDimension
 from prompt_toolkit.layout.layout import Layout
 from prompt_toolkit.layout.processors import AfterInput, BeforeInput
 from prompt_toolkit.lexers.base import SimpleLexer
+from prompt_toolkit.formatted_text import to_formatted_text
 from prompt_toolkit.validation import ValidationError
 from prompt_toolkit.widgets.base import Frame
 
@@ -51,6 +52,7 @@ from InquirerPy.utils import (
     InquirerPyStyle,
     InquirerPyValidate,
     calculate_height,
+    expand_formatted_text,
 )
 
 if TYPE_CHECKING:
@@ -129,10 +131,15 @@ class InquirerPyFuzzyControl(InquirerPyUIListControl):
         )
         display_choices.append(("[SetCursorPosition]", ""))
         if not choice["indices"]:
-            display_choices.append(("class:pointer", choice["name"]))
+            display_choices.extend(expand_formatted_text("class:pointer", choice["name"]))
         else:
             indices = set(choice["indices"])
-            for index, char in enumerate(choice["name"]):
+            name = choice["name"]
+            if not isinstance(name, str):
+                # Fuzzy matching with formatted text: iterate over plain text
+                from prompt_toolkit.formatted_text import fragment_list_to_text
+                name = fragment_list_to_text(to_formatted_text(name))
+            for index, char in enumerate(name):
                 if index in indices:
                     display_choices.append(("class:fuzzy_match", char))
                 else:
@@ -163,10 +170,14 @@ class InquirerPyFuzzyControl(InquirerPyUIListControl):
             )
         )
         if not choice["indices"]:
-            display_choices.append(("", choice["name"]))
+            display_choices.extend(expand_formatted_text("", choice["name"]))
         else:
             indices = set(choice["indices"])
-            for index, char in enumerate(choice["name"]):
+            name = choice["name"]
+            if not isinstance(name, str):
+                from prompt_toolkit.formatted_text import fragment_list_to_text
+                name = fragment_list_to_text(to_formatted_text(name))
+            for index, char in enumerate(name):
                 if index in indices:
                     display_choices.append(("class:fuzzy_match", char))
                 else:

@@ -17,6 +17,7 @@ from InquirerPy.utils import (
     InquirerPySessionResult,
     InquirerPyStyle,
     InquirerPyValidate,
+    expand_formatted_text,
 )
 
 __all__ = ["ExpandPrompt", "ExpandHelp", "ExpandChoice"]
@@ -156,8 +157,10 @@ class InquirerPyExpandControl(InquirerPyUIListControl):
         else:
             display_choices = []
             display_choices.append(("class:pointer", self._expand_pointer))
-            display_choices.append(
-                ("", self.choices[self.selected_choice_index]["name"])
+            display_choices.extend(
+                expand_formatted_text(
+                    "", self.choices[self.selected_choice_index]["name"]
+                )
             )
         return display_choices
 
@@ -175,7 +178,7 @@ class InquirerPyExpandControl(InquirerPyUIListControl):
                 ("class:pointer", "%s%s" % (choice["key"], self._separator))
             )
         display_choices.append(("[SetCursorPosition]", ""))
-        display_choices.append(("class:pointer", choice["name"]))
+        display_choices.extend(expand_formatted_text("class:pointer", choice["name"]))
         return display_choices
 
     def _get_normal_text(self, choice) -> List[Tuple[str, str]]:
@@ -189,9 +192,9 @@ class InquirerPyExpandControl(InquirerPyUIListControl):
         )
         if not isinstance(choice["value"], Separator):
             display_choices.append(("", "%s%s" % (choice["key"], self._separator)))
-            display_choices.append(("", choice["name"]))
+            display_choices.extend(expand_formatted_text("", choice["name"]))
         else:
-            display_choices.append(("class:separator", choice["name"]))
+            display_choices.extend(expand_formatted_text("class:separator", choice["name"]))
         return display_choices
 
 

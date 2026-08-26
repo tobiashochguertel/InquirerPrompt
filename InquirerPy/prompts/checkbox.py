@@ -19,6 +19,7 @@ from InquirerPy.utils import (
     InquirerPySessionResult,
     InquirerPyStyle,
     InquirerPyValidate,
+    expand_formatted_text,
 )
 
 __all__ = ["CheckboxPrompt"]
@@ -72,7 +73,7 @@ class InquirerPyCheckboxControl(InquirerPyUIListControl):
             if self._enabled_symbol and self._disabled_symbol:
                 display_choices.append(("", " "))
         display_choices.append(("[SetCursorPosition]", ""))
-        display_choices.append(("class:pointer", choice["name"]))
+        display_choices.extend(expand_formatted_text("class:pointer", choice["name"]))
         return display_choices
 
     def _get_normal_text(self, choice) -> List[Tuple[str, str]]:
@@ -93,9 +94,9 @@ class InquirerPyCheckboxControl(InquirerPyUIListControl):
             )
             if self._enabled_symbol and self._disabled_symbol:
                 display_choices.append(("", " "))
-            display_choices.append(("", choice["name"]))
+            display_choices.extend(expand_formatted_text("", choice["name"]))
         else:
-            display_choices.append(("class:separator", choice["name"]))
+            display_choices.extend(expand_formatted_text("class:separator", choice["name"]))
         return display_choices
 
 
