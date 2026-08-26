@@ -162,7 +162,7 @@ class InputPrompt(BaseSimplePrompt):
         self._keybinding_factory()
 
         self._session = PromptSession(
-            message=self._get_prompt_message,
+            message=self._get_prompt_message,  # type: ignore
             key_bindings=self._kb,
             style=self._style,
             completer=self._completer,

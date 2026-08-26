@@ -82,7 +82,7 @@ class SpinnerWindow(ConditionalContainer):
         self._text = text or "Loading ..."
 
         super().__init__(
-            content=Window(content=FormattedTextControl(text=self._get_text)),
+            content=Window(content=FormattedTextControl(text=self._get_text)),  # type: ignore
             filter=self._loading,
         )
 

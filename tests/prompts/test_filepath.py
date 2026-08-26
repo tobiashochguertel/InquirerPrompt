@@ -22,17 +22,15 @@ from InquirerPy.validator import PathValidator
 
 class TestFilePath(unittest.TestCase):
     def setUp(self):
-        self.inp = create_pipe_input()
+        self._pipe_input_ctx = create_pipe_input()
+        self.inp = self._pipe_input_ctx.__enter__()
         self.dirs_to_create = ["dir1", "dir2", "dir3", ".dir"]
         self.files_to_create = ["file1", "file2", "file3", ".file"]
         self.test_dir = Path(tempfile.mkdtemp())
         self.create_temp_files()
 
     def tearDown(self):
-        try:
-            self.inp.close()
-        except AttributeError:
-            pass
+        self._pipe_input_ctx.__exit__(None, None, None)
         shutil.rmtree(self.test_dir)
 
     @contextmanager

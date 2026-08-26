@@ -452,9 +452,9 @@ class FuzzyPrompt(BaseListPrompt):
             height=LayoutDimension.exact(1),
             content=BufferControl(
                 self._buffer,
-                [
-                    AfterInput(self._generate_after_input),
-                    BeforeInput(self._generate_before_input),
+                [  # type: ignore
+                    AfterInput(self._generate_after_input),  # type: ignore
+                    BeforeInput(self._generate_before_input),  # type: ignore
                 ],
                 lexer=SimpleLexer("class:input"),
             ),
@@ -479,7 +479,7 @@ class FuzzyPrompt(BaseListPrompt):
                 content=HSplit(
                     [
                         MessageWindow(
-                            message=self._get_prompt_message,
+                            message=self._get_prompt_message,  # type: ignore
                             filter=True,
                             wrap_lines=self._wrap_lines,
                             show_cursor=True,
@@ -499,9 +499,9 @@ class FuzzyPrompt(BaseListPrompt):
                         ),
                     ],
                 ),
-                floats=[
+                floats=[  # type: ignore
                     ValidationFloat(
-                        invalid_message=self._get_error_message,
+                        invalid_message=self._get_error_message,  # type: ignore
                         filter=self._is_invalid & ~IsDone(),
                         wrap_lines=self._wrap_lines,
                         left=0,
