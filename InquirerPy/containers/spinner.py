@@ -32,7 +32,9 @@ class SPINNERS(NamedTuple):
     Examples:
         >>> from InquirerPy import inquirer
         >>> from InquirerPy.spinner import SPINNERS
-        >>> inquirer.select(message="", choices=lambda _: [1, 2, 3], spinner_pattern=SPINNERS.dots)
+        >>> inquirer.select(
+        ...     message="", choices=lambda _: [1, 2, 3], spinner_pattern=SPINNERS.dots
+        ... )
     """
 
     dots = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]

@@ -178,7 +178,9 @@ class RawlistPrompt(ListPrompt):
 
     Examples:
         >>> from InquirerPy import inquirer
-        >>> result = inquirer.rawlist(message="Select one:", choices=[1, 2, 3]).execute()
+        >>> result = inquirer.rawlist(
+        ...     message="Select one:", choices=[1, 2, 3]
+        ... ).execute()
         >>> print(result)
         1
     """

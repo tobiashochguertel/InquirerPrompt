@@ -119,10 +119,10 @@ class InquirerPyExpandControl(InquirerPyUIListControl):
                     )
                     self._key_maps[choice["key"]] = count
                 count += 1
-        except KeyError:
+        except KeyError as e:
             raise RequiredKeyNotFound(
                 "expand prompt choice requires a key 'key' to exists"
-            )
+            ) from e
 
         self.choices.append(
             {

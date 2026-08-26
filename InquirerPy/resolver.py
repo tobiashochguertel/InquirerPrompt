@@ -119,8 +119,8 @@ async def prompt_async(
             result[question_name] = await question_mapping[question_type](
                 **args, **question
             ).execute_async()
-        except KeyError:
-            raise RequiredKeyNotFound
+        except KeyError as e:
+            raise RequiredKeyNotFound from e
 
     return result
 
@@ -168,15 +168,19 @@ def prompt(
         ...         "default": "18",
         ...         "name": "age",
         ...         "filter": lambda result: int(result),
-        ...         "transformer": lambda result: "Adult" if int(result) >= 18 else "Youth",
+        ...         "transformer": lambda result: (
+        ...             "Adult" if int(result) >= 18 else "Youth"
+        ...         ),
         ...     },
         ...     {
         ...         "type": "rawlist",
         ...         "message": "What drinks would you like to buy:",
         ...         "default": 2,
-        ...         "choices": lambda result: ["Soda", "Cidr", "Water", "Milk"]
-        ...         if result["age"] < 18
-        ...         else ["Wine", "Beer"],
+        ...         "choices": lambda result: (
+        ...             ["Soda", "Cidr", "Water", "Milk"]
+        ...             if result["age"] < 18
+        ...             else ["Wine", "Beer"]
+        ...         ),
         ...         "name": "drink",
         ...     },
         ...     {
@@ -214,7 +218,7 @@ def prompt(
             result[question_name] = question_mapping[question_type](
                 **args, **question
             ).execute()
-        except KeyError:
-            raise RequiredKeyNotFound
+        except KeyError as e:
+            raise RequiredKeyNotFound from e
 
     return result
