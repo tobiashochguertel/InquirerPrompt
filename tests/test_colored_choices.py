@@ -4,15 +4,20 @@ Verifies that choice names can be prompt_toolkit formatted text objects
 (HTML, ANSI, FormattedText) and are correctly expanded into (style, text)
 tuples by the prompt rendering methods.
 """
+
 import unittest
 
 from prompt_toolkit.formatted_text import ANSI, HTML, FormattedText
 
 from InquirerPy.base.control import Choice
-from InquirerPy.prompts.list import InquirerPyListControl, ListPrompt
 from InquirerPy.prompts.checkbox import InquirerPyCheckboxControl
+from InquirerPy.prompts.expand import (
+    ExpandChoice,
+    ExpandHelp,
+    InquirerPyExpandControl,
+)
+from InquirerPy.prompts.list import InquirerPyListControl
 from InquirerPy.prompts.rawlist import InquirerPyRawlistControl
-from InquirerPy.prompts.expand import InquirerPyExpandControl, ExpandPrompt, ExpandChoice, ExpandHelp
 from InquirerPy.separator import Separator
 from InquirerPy.utils import expand_formatted_text
 
@@ -27,7 +32,9 @@ class TestExpandFormattedText(unittest.TestCase):
 
     def test_html(self):
         """HTML objects are expanded into (style, text) tuples."""
-        result = expand_formatted_text("class:pointer", HTML("<ansigreen>✓ OK</ansigreen>"))
+        result = expand_formatted_text(
+            "class:pointer", HTML("<ansigreen>✓ OK</ansigreen>")
+        )
         self.assertEqual(
             result,
             [("class:ansigreen", "✓ OK")],

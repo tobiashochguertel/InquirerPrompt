@@ -1,8 +1,9 @@
 """Module contains the class to create filepath prompt and filepath completer class."""
 
 import os
+from collections.abc import Generator
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Callable, Generator, Optional
+from typing import TYPE_CHECKING, Any, Callable, Optional
 
 from prompt_toolkit.completion import Completer, Completion
 from prompt_toolkit.completion.base import ThreadedCompleter
@@ -63,8 +64,7 @@ class FilePathCompleter(Completer):
         else:
             dirname = Path(os.path.dirname(document.text))
 
-        for item in self._get_completion(document, dirname, validation):
-            yield item
+        yield from self._get_completion(document, dirname, validation)
 
     def _get_completion(
         self, document, path, validation

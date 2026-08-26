@@ -32,8 +32,10 @@ jobs:
           version: ${{ env.UV_VERSION }}
       - name: Install dependencies
         run: uv sync --group dev
-      - name: Run pre-commit
-        run: uv run pre-commit run --all-files
+      - name: Run ruff check
+        run: uv run ruff check InquirerPy/ tests/
+      - name: Run ruff format
+        run: uv run ruff format --check InquirerPy/ tests/
       - name: Run pyright
         run: uv run pyright InquirerPy
 

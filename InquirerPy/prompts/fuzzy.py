@@ -653,9 +653,9 @@ class FuzzyPrompt(BaseListPrompt):
         if not self._multiselect:
             return
         current_selected_index = self.content_control.selection["index"]
-        self.content_control.choices[current_selected_index]["enabled"] = (
-            not self.content_control.choices[current_selected_index]["enabled"]
-        )
+        self.content_control.choices[current_selected_index][
+            "enabled"
+        ] = not self.content_control.choices[current_selected_index]["enabled"]
 
     def _handle_enter(self, event: "KeyPressEvent") -> None:
         """Handle enter event.

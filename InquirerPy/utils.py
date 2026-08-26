@@ -19,8 +19,6 @@ from prompt_toolkit import print_formatted_text
 from prompt_toolkit.application import run_in_terminal
 from prompt_toolkit.application.current import get_app
 from prompt_toolkit.formatted_text import (
-    ANSI,
-    HTML,
     FormattedText,
     StyleAndTextTuples,
     to_formatted_text,
@@ -105,7 +103,9 @@ def get_style(
     Examples:
         >>> from InquirerPy import get_style
         >>> from InquirerPy import inquirer
-        >>> style = get_style({"questionmark": "#ffffff", "answer": "#000000"}, style_override=False)
+        >>> style = get_style(
+        ...     {"questionmark": "#ffffff", "answer": "#000000"}, style_override=False
+        ... )
         >>> result = inquirer.confirm(message="Confirm?", style=style).execute()
     """
     if not style_override or style is None:
@@ -243,10 +243,10 @@ def calculate_height(
             dimmension_max_height = 1
         return dimmension_height, dimmension_max_height
 
-    except ValueError:
+    except ValueError as e:
         raise InvalidArgument(
             "prompt argument height/max_height needs to be type of an int or str"
-        )
+        ) from e
 
 
 def patched_print(*values) -> None:
@@ -282,7 +282,10 @@ def color_print(
         style: Style to apply to `formatted_text` in :class:`dictionary` form.
 
     Example:
-        >>> color_print(formatted_text=[("class:aa", "hello "), ("class:bb", "world")], style={"aa": "red", "bb": "blue"})
+        >>> color_print(
+        ...     formatted_text=[("class:aa", "hello "), ("class:bb", "world")],
+        ...     style={"aa": "red", "bb": "blue"},
+        ... )
         >>> color_print([("red", "yes"), ("", " "), ("blue", "no")])
     """
 

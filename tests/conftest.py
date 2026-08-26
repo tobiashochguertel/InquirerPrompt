@@ -3,6 +3,7 @@
 Patches prompt_toolkit's terminal I/O so tests that don't provide
 their own input/output run successfully in CI (no real TTY available).
 """
+
 import pytest
 
 
