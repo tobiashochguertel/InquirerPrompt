@@ -2,10 +2,10 @@
 
 ```{note}
 Printing values while the prompt is running can cause various side effects. Using the patched print function from
-`InquirerPy` can print the value above the prompt without causing side effects. Mostly useful for debugging.
+`InquirerPrompt` can print the value above the prompt without causing side effects. Mostly useful for debugging.
 ```
 
-`InquirerPy` provides a helper function {func}`~InquirerPy.utils.patched_print` which can help printing to the terminal
+`InquirerPrompt` provides a helper function {func}`~InquirerPy.utils.patched_print` which can help printing to the terminal
 while the prompt is still running.
 
 ```{eval-rst}
