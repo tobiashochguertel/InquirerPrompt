@@ -11,6 +11,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Centralized version pins — adjust here to update all jobs
+env:
+  UV_VERSION: "0.5.18"
+  PYTHON_VERSIONS: '["3.9", "3.10", "3.11", "3.12", "3.13"]'
+
 jobs:
   lint:
     name: Lint
@@ -20,25 +25,17 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - name: Install poetry
-        uses: snok/install-poetry@v1
+          python-version: "3.12"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          version: 1.8.5
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-      - name: Load cached venv
-        id: cached-poetry-dependencies
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-lint-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+          version: ${{ env.UV_VERSION }}
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: uv sync --group dev
       - name: Run pre-commit
-        run: poetry run pre-commit run --all-files
+        run: uv run pre-commit run --all-files
       - name: Run pyright
-        run: poetry run pyright InquirerPy
+        run: uv run pyright InquirerPy
 
   test:
     name: Test (Python ${{ matrix.python-version }})
@@ -46,7 +43,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ${{ fromJSON(env.PYTHON_VERSIONS) }}
 
     steps:
       - uses: actions/checkout@v4
@@ -54,22 +51,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install poetry
-        uses: snok/install-poetry@v1
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          version: 1.8.5
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-      - name: Load cached venv
-        id: cached-poetry-dependencies
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          version: ${{ env.UV_VERSION }}
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: uv sync --group dev --python ${{ matrix.python-version }}
       - name: Run tests
-        run: poetry run python -m pytest tests/ -v --tb=short
+        run: uv run pytest tests/ -v --tb=short
 
   coverage:
     name: Coverage
@@ -79,26 +68,18 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - name: Install poetry
-        uses: snok/install-poetry@v1
+          python-version: "3.12"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          version: 1.8.5
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-      - name: Load cached venv
-        id: cached-poetry-dependencies
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-coverage-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+          version: ${{ env.UV_VERSION }}
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: uv sync --group dev
       - name: Run coverage
         run: |
-          poetry run coverage run -m pytest tests/
-          poetry run coverage xml
-          poetry run coverage report
+          uv run coverage run -m pytest tests/
+          uv run coverage xml
+          uv run coverage report
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
