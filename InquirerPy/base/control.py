@@ -78,7 +78,7 @@ class InquirerPyUIListControl(FormattedTextControl):
         self._choices = self._get_choices(self._raw_choices, self._default)
         self._safety_check()
         self._format_choices()
-        super().__init__(self._get_formatted_choices)
+        super().__init__(self._get_formatted_choices)  # type: ignore
 
     def _get_choices(self, choices: List[Any], default: Any) -> List[Dict[str, Any]]:
         """Process the raw user input choices and format it into dictionary.

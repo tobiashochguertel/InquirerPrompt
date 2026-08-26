@@ -280,7 +280,7 @@ class NumberPrompt(BaseComplexPrompt):
                                     if not self._wrap_lines
                                     else None
                                 ),
-                                content=FormattedTextControl(self._get_prompt_message),
+                                content=FormattedTextControl(self._get_prompt_message),  # type: ignore
                                 wrap_lines=self._wrap_lines,
                                 dont_extend_height=True,
                                 dont_extend_width=True,
@@ -313,7 +313,7 @@ class NumberPrompt(BaseComplexPrompt):
                         filter=~IsDone() & self._is_displaying_long_instruction,
                     ),
                     ValidationWindow(
-                        invalid_message=self._get_error_message,
+                        invalid_message=self._get_error_message,  # type: ignore
                         filter=self._is_invalid & ~IsDone(),
                         wrap_lines=self._wrap_lines,
                     ),
