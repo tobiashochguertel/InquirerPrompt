@@ -15,13 +15,11 @@ from InquirerPy.prompts.input import InputPrompt
 
 class TestInputPrompt(unittest.TestCase):
     def setUp(self):
-        self.inp = create_pipe_input()
+        self._pipe_input_ctx = create_pipe_input()
+        self.inp = self._pipe_input_ctx.__enter__()
 
     def tearDown(self):
-        try:
-            self.inp.close()
-        except AttributeError:
-            pass
+        self._pipe_input_ctx.__exit__(None, None, None)
 
     def test_prompt_result(self):
         self.inp.send_text("hello\n")

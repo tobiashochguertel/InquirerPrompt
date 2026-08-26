@@ -7,7 +7,7 @@ their own input/output run successfully in CI (no real TTY available).
 import pytest
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(autouse=True, scope="function")
 def patch_terminal_for_tests():
     """Provide a fake pipe input/output session for all tests.
 
@@ -24,14 +24,8 @@ def patch_terminal_for_tests():
     from prompt_toolkit.input import create_pipe_input
     from prompt_toolkit.output import DummyOutput
 
-    inp = create_pipe_input()
-    try:
+    # create_pipe_input() returns a context manager in prompt_toolkit >= 3.0.40
+    # — must use `with` to get the actual PipeInput object
+    with create_pipe_input() as inp:
         with create_app_session(input=inp, output=DummyOutput()):
             yield inp
-    finally:
-        try:
-            inp.close()
-        except AttributeError:
-            # prompt_toolkit >= 3.0.40: create_pipe_input() returns a
-            # context manager; closing is handled by __exit__.
-            pass

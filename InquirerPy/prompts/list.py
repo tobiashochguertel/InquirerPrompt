@@ -253,7 +253,7 @@ class ListPrompt(BaseListPrompt):
             content=HSplit(
                 [
                     MessageWindow(
-                        message=(
+                        message=(  # type: ignore
                             self._get_prompt_message_with_cursor
                             if self._show_cursor
                             else self._get_prompt_message
@@ -274,9 +274,9 @@ class ListPrompt(BaseListPrompt):
                     ),
                 ]
             ),
-            floats=[
+            floats=[  # type: ignore
                 ValidationFloat(
-                    invalid_message=self._get_error_message,
+                    invalid_message=self._get_error_message,  # type: ignore
                     filter=self._is_invalid & ~IsDone(),
                     wrap_lines=self._wrap_lines,
                     left=0,
