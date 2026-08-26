@@ -28,7 +28,7 @@ class MessageWindow(ConditionalContainer):
         filter: "FilterOrBool",
         wrap_lines: bool = True,
         show_cursor: bool = True,
-        **kwargs
+        **kwargs,
     ) -> None:
         super().__init__(
             content=Window(
@@ -36,7 +36,7 @@ class MessageWindow(ConditionalContainer):
                 content=FormattedTextControl(message, show_cursor=show_cursor),
                 wrap_lines=wrap_lines,
                 dont_extend_height=True,
-                **kwargs
+                **kwargs,
             ),
             filter=filter,
         )

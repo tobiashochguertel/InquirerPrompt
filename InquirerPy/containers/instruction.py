@@ -24,7 +24,7 @@ class InstructionWindow(ConditionalContainer):
             Window(
                 FormattedTextControl(text=self._get_message),
                 dont_extend_height=True,
-                **kwargs
+                **kwargs,
             ),
             filter=filter,
         )
