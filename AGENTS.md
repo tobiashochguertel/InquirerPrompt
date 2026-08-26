@@ -1,4 +1,4 @@
-# InquirerPy (InquirerPrompt) — Agent Guidelines
+# InquirerPrompt — Agent Guidelines
 
 ## Project Overview
 
@@ -45,8 +45,8 @@ When merging a branch into `dev`, all its documentation comes with it automatica
 ### Setup
 
 ```bash
-git clone https://github.com/tobiashochguertel/InquirerPy.git
-cd InquirerPy
+git clone https://github.com/tobiashochguertel/InquirerPrompt.git
+cd InquirerPrompt
 git remote add upstream https://github.com/kazhala/InquirerPy.git
 uv sync
 ```

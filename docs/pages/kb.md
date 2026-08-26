@@ -1,6 +1,6 @@
 # Keybindings
 
-By default, `InquirerPy` will use most of the standard `emacs` navigation keybindings. You
+By default, `InquirerPrompt` will use most of the standard `emacs` navigation keybindings. You
 can easily switch to `vim` keybindings by setting the parameter [vi_mode](#using-vim-keybindings) to `True`.
 
 You can customise the keybindings even further by utilising the parameter [keybindings](#customizing-keybindings).
@@ -45,10 +45,10 @@ Please checkout the individual prompt documentation for the available actions an
 ## Using VIM Keybindings
 
 ```{tip}
-All `InquirerPy` prompts accepts a boolean parameter `vi_mode`.
+All `InquirerPrompt` prompts accepts a boolean parameter `vi_mode`.
 ```
 
-`InquirerPy` comes with `vim` keybinding preset. After setting `vi_mode=True`, the input buffer (text fields) will behave the same as
+`InquirerPrompt` comes with `vim` keybinding preset. After setting `vi_mode=True`, the input buffer (text fields) will behave the same as
 if you enable the `vi` mode in [readline/bash](https://www.gnu.org/software/bash/manual/html_node/Readline-vi-Mode.html).
 Other keybinding will also have different effects (e.g. `up/down` will change from `ctrl-n/ctrl-p` to `j/k`), refer to individual
 prompt documentation for more information.

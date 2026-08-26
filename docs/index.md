@@ -1,4 +1,4 @@
-# InquirerPy
+# InquirerPrompt
 
 ```{include} ../README.md
 :start-after: <!-- start intro -->
@@ -19,7 +19,7 @@ pip3 install InquirerPrompt
 
 ## Basic Usage
 
-`InquirerPy` provides two types of syntax that you can choose to use: [Classic syntax](#classic-syntax-pyinquirer) and [Alternate Syntax](#alternate-syntax).
+`InquirerPrompt` provides two types of syntax that you can choose to use: [Classic syntax](#classic-syntax-pyinquirer) and [Alternate Syntax](#alternate-syntax).
 
 ```{Tip}
 For any new users, [Alternate Syntax](#alternate-syntax) is recommended as its more flexible and extensible.
@@ -90,13 +90,13 @@ Please visit the sidebar on the left.
 
 ## Running Examples
 
-`InquirerPy` provides several examples that you can run and play around.
+`InquirerPrompt` provides several examples that you can run and play around.
 
 1. Clone the repository
 
 ```
-git clone https://github.com/tobiashochguertel/InquirerPy.git
-cd InquirerPy
+git clone https://github.com/tobiashochguertel/InquirerPrompt.git
+cd InquirerPrompt
 ```
 
 2. Create a Virtual Environment (Recommended)
@@ -185,5 +185,5 @@ pages/faq.md
 pages/compatibility.md
 pages/api.md
 pages/changelog.md
-GitHub Repository <https://github.com/tobiashochguertel/InquirerPy>
+GitHub Repository <https://github.com/tobiashochguertel/InquirerPrompt>
 ```

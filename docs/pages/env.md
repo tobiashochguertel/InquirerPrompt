@@ -1,7 +1,7 @@
 # Environment Variables
 
 ```{tip}
-If you make calls to `InquirerPy` multiple times with a lot of customisation, you can consider utilising ENV variables.
+If you make calls to `InquirerPrompt` multiple times with a lot of customisation, you can consider utilising ENV variables.
 ```
 
 Several options can be configured via ENV variables.
@@ -127,7 +127,7 @@ result = inquirer.text(message="Name").execute()
 ### Mapping
 
 ```{note}
-The value of `INQUIRERPY_VI_MODE` does not matter, as long as its a string longer than 0, `InquirerPy` will set `vi_mode=True`.
+The value of `INQUIRERPY_VI_MODE` does not matter, as long as its a string longer than 0, `InquirerPrompt` will set `vi_mode=True`.
 ```
 
 | parameter      | ENV                |
@@ -185,7 +185,7 @@ result = inquirer.text(message="Name").execute()
 
 ```{note}
 The value of `INQUIRERPY_NO_RAISE_KBI` does not matter, as long as its a string longer than 0,
-InquirerPy will not raise {class}`KeyboardInterrupt` when user hit `ctrl-c`.
+InquirerPrompt will not raise {class}`KeyboardInterrupt` when user hit `ctrl-c`.
 ```
 
 | parameter                        | ENV                     |
