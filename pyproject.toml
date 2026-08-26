@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "InquirerPrompt"
-version = "0.4.0"
+version = "0.4.1"
 description = "Python port of Inquirer.js — a collection of common interactive command-line user interfaces (community-maintained fork of InquirerPy)"
 readme = "README.md"
 license = "MIT"
