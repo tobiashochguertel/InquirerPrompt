@@ -138,10 +138,10 @@ class InquirerPyUIListControl(FormattedTextControl):
                     processed_choices.append(
                         {"name": str(choice), "value": choice, "enabled": False}
                     )
-        except KeyError:
+        except KeyError as e:
             raise RequiredKeyNotFound(
                 "dictionary type of choice require a 'name' key and a 'value' key"
-            )
+            ) from e
         return processed_choices
 
     @property

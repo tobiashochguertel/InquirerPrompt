@@ -1,4 +1,3 @@
-import asyncio
 import unittest
 
 from InquirerPy.base.control import Choice

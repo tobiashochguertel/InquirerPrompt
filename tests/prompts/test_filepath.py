@@ -49,7 +49,7 @@ class TestFilePath(unittest.TestCase):
             self.test_dir.joinpath(directory).mkdir(exist_ok=True)
         for file in self.files_to_create:
             with self.test_dir.joinpath(file).open("wb") as output_file:
-                output_file.write("".encode("UTF-8"))
+                output_file.write(b"")
 
     def test_completer_explicit_currdir_all(self):
         with self.chdir(self.test_dir):

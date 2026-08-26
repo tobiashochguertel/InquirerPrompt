@@ -41,10 +41,10 @@ class NumberValidator(Validator):
                 float(document.text)
             else:
                 int(document.text)
-        except ValueError:
+        except ValueError as e:
             raise ValidationError(
                 message=self._message, cursor_position=document.cursor_position
-            )
+            ) from e
 
 
 class PathValidator(Validator):
