@@ -194,7 +194,9 @@ class InquirerPyExpandControl(InquirerPyUIListControl):
             display_choices.append(("", "%s%s" % (choice["key"], self._separator)))
             display_choices.extend(expand_formatted_text("", choice["name"]))
         else:
-            display_choices.extend(expand_formatted_text("class:separator", choice["name"]))
+            display_choices.extend(
+                expand_formatted_text("class:separator", choice["name"])
+            )
         return display_choices
 
 

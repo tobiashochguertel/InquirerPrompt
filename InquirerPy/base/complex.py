@@ -204,10 +204,19 @@ class BaseComplexPrompt(BaseSimplePrompt):
         result = self.status["result"]
         # Check for prompt_toolkit formatted text objects (HTML/ANSI/FormattedText).
         # Regular strings and lists (multiselect) use the original string formatting.
-        from prompt_toolkit.formatted_text import HTML, ANSI, FormattedText, fragment_list_to_text, to_formatted_text
+        from prompt_toolkit.formatted_text import (
+            ANSI,
+            HTML,
+            FormattedText,
+            fragment_list_to_text,
+            to_formatted_text,
+        )
 
         if isinstance(result, (HTML, ANSI, FormattedText)):
-            post_answer = ("class:answer", " %s" % fragment_list_to_text(to_formatted_text(result)))
+            post_answer = (
+                "class:answer",
+                " %s" % fragment_list_to_text(to_formatted_text(result)),
+            )
         else:
             post_answer = ("class:answer", " %s" % result)
         return super()._get_prompt_message(pre_answer, post_answer)

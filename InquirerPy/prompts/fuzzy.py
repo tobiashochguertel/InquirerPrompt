@@ -20,6 +20,7 @@ from pfzy.types import HAYSTACKS
 from prompt_toolkit.application.application import Application
 from prompt_toolkit.buffer import Buffer
 from prompt_toolkit.filters.cli import IsDone
+from prompt_toolkit.formatted_text import to_formatted_text
 from prompt_toolkit.layout.containers import (
     ConditionalContainer,
     FloatContainer,
@@ -31,7 +32,6 @@ from prompt_toolkit.layout.dimension import Dimension, LayoutDimension
 from prompt_toolkit.layout.layout import Layout
 from prompt_toolkit.layout.processors import AfterInput, BeforeInput
 from prompt_toolkit.lexers.base import SimpleLexer
-from prompt_toolkit.formatted_text import to_formatted_text
 from prompt_toolkit.validation import ValidationError
 from prompt_toolkit.widgets.base import Frame
 
@@ -131,13 +131,16 @@ class InquirerPyFuzzyControl(InquirerPyUIListControl):
         )
         display_choices.append(("[SetCursorPosition]", ""))
         if not choice["indices"]:
-            display_choices.extend(expand_formatted_text("class:pointer", choice["name"]))
+            display_choices.extend(
+                expand_formatted_text("class:pointer", choice["name"])
+            )
         else:
             indices = set(choice["indices"])
             name = choice["name"]
             if not isinstance(name, str):
                 # Fuzzy matching with formatted text: iterate over plain text
                 from prompt_toolkit.formatted_text import fragment_list_to_text
+
                 name = fragment_list_to_text(to_formatted_text(name))
             for index, char in enumerate(name):
                 if index in indices:
@@ -176,6 +179,7 @@ class InquirerPyFuzzyControl(InquirerPyUIListControl):
             name = choice["name"]
             if not isinstance(name, str):
                 from prompt_toolkit.formatted_text import fragment_list_to_text
+
                 name = fragment_list_to_text(to_formatted_text(name))
             for index, char in enumerate(name):
                 if index in indices:
