@@ -140,6 +140,21 @@ Plain string choice names work as before — this feature is fully backward comp
 
 See the [Style](https://InquirerPrompt.readthedocs.io/en/latest/pages/style.html) documentation for available color classes and the `examples/colored_choices.py` demo script.
 
+### Erase When Done
+
+All list-type prompts (`select`, `checkbox`, `rawlist`, `expand`, `fuzzy`, `number`) accept an `erase_when_done` parameter. When `True`, the prompt UI is erased from the terminal after the user answers — useful when prompts are used in a loop to avoid ghost lines accumulating.
+
+```python
+from InquirerPy import inquirer
+
+result = inquirer.select(
+    message="Pick one:",
+    choices=["a", "b", "c"],
+    erase_when_done=True,
+).execute()
+# Terminal output is clean — no prompt artifacts left behind
+```
+
 <!-- start migration -->
 
 ## Migrating from PyInquirer
