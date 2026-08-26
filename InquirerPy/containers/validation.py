@@ -47,7 +47,7 @@ class ValidationFloat(Float):
         right: Optional[int] = None,
         bottom: Optional[int] = None,
         top: Optional[int] = None,
-        **kwargs
+        **kwargs,
     ) -> None:
         super().__init__(
             content=ValidationWindow(

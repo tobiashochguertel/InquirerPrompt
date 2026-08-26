@@ -8,6 +8,11 @@ permissions:
   contents: write
   id-token: write
 
+# Centralized version pins — adjust here to update all jobs
+env:
+  UV_VERSION: "0.5.18"
+  PYTHON_VERSION: "3.12"
+
 jobs:
   release:
     name: Semantic Release
@@ -24,24 +29,15 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Install poetry
-        uses: snok/install-poetry@v1
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          version: 1.8.5
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-
-      - name: Load cached venv
-        id: cached-poetry-dependencies
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-release-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+          version: ${{ env.UV_VERSION }}
 
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: uv sync --group dev
 
       - name: Python Semantic Release
         id: release

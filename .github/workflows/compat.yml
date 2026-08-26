@@ -10,6 +10,11 @@ on:
     - cron: "0 6 * * 1"
   workflow_dispatch:
 
+# Centralized version pins — adjust here to update all jobs
+env:
+  UV_VERSION: "0.5.18"
+  PYTHON_VERSION: "3.12"
+
 jobs:
   compat:
     name: API Compatibility vs upstream InquirerPy
@@ -25,13 +30,18 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: ${{ env.UV_VERSION }}
 
       - name: Install griffe
-        run: pip install "griffe>=1.0"
+        run: uv pip install "griffe>=1.0"
 
       - name: Install fork package (editable)
-        run: pip install -e .
+        run: uv pip install -e .
 
       - name: Run compatibility check
         id: compat

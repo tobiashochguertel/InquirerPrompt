@@ -48,7 +48,7 @@ When merging a branch into `dev`, all its documentation comes with it automatica
 git clone https://github.com/tobiashochguertel/InquirerPrompt.git
 cd InquirerPrompt
 git remote add upstream https://github.com/kazhala/InquirerPy.git
-uv sync
+uv sync --group dev
 ```
 
 ### Running Tests
