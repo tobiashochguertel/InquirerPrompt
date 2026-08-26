@@ -14,7 +14,6 @@ concurrency:
 # Centralized version pins — adjust here to update all jobs
 env:
   UV_VERSION: "0.5.18"
-  PYTHON_VERSIONS: '["3.9", "3.10", "3.11", "3.12", "3.13"]'
 
 jobs:
   lint:
@@ -45,7 +44,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ${{ fromJSON(env.PYTHON_VERSIONS) }}
+        # Add/remove Python versions here
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
