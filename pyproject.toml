@@ -66,7 +66,7 @@ dev = [
   "pyright>=1.1",
   "pytest>=8.0",
   "pytest-cov>=5.0",
-  "python-semantic-release>=9.0",
+  "python-semantic-release>=10.0",
   "pyyaml>=6.0.1",
   "ruff>=0.8",
 ]
@@ -125,8 +125,12 @@ convention = "pep257"
 docstring-code-format = true
 
 [tool.semantic_release]
-version_toml = ["pyproject.toml:project.version"]
-build_command = "uv build"
+version_variables = ["pyproject.toml:project.version"]
+build_command = """
+  uv lock --upgrade-package "$PACKAGE_NAME"
+  git add uv.lock
+  uv build
+"""
 commit_parser = "conventional"
 tag_format = "v{version}"
 major_on_zero = false
@@ -135,7 +139,7 @@ major_on_zero = false
 match = "main"
 
 [tool.semantic_release.changelog]
-changelog_file = "CHANGELOG.md"
+default_templates.changelog_file = "CHANGELOG.md"
 
 [tool.semantic_release.publish]
 upload_to_vcs_release = true

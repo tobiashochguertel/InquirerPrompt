@@ -1031,7 +1031,7 @@ dev = [
     { name = "pyright", specifier = ">=1.1" },
     { name = "pytest", specifier = ">=8.0" },
     { name = "pytest-cov", specifier = ">=5.0" },
-    { name = "python-semantic-release", specifier = ">=9.0" },
+    { name = "python-semantic-release", specifier = ">=10.0" },
     { name = "pyyaml", specifier = ">=6.0.1" },
     { name = "ruff", specifier = ">=0.8" },
 ]
