@@ -1,5 +1,5 @@
-from InquirerPy import prompt
-from InquirerPy.validator import PasswordValidator
+from InquirerPrompt import prompt
+from InquirerPrompt.validator import PasswordValidator
 
 original_password = "InquirerPy45@"
 

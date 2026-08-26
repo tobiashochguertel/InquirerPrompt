@@ -5,9 +5,9 @@ from prompt_toolkit.enums import EditingMode
 from prompt_toolkit.key_binding.key_bindings import KeyBindings
 from prompt_toolkit.styles.style import Style
 
-from InquirerPy.prompts.list import InquirerPyListControl, ListPrompt
-from InquirerPy.separator import Separator
-from InquirerPy.utils import InquirerPyStyle
+from InquirerPrompt.prompts.list import InquirerPyListControl, ListPrompt
+from InquirerPrompt.separator import Separator
+from InquirerPrompt.utils import InquirerPyStyle
 
 
 class TestBaseList(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestBaseList(unittest.TestCase):
         {"name": "melon", "value": "watermelon"},
     ]
 
-    @patch("InquirerPy.base.complex.shutil.get_terminal_size")
+    @patch("InquirerPrompt.base.complex.shutil.get_terminal_size")
     def test_list_prompt(self, mocked_term):
         mocked_term.return_value = (24, 80)
         message = 15 * "i"
@@ -284,7 +284,7 @@ class TestBaseList(unittest.TestCase):
             prompt.status, {"result": "apple", "answered": True, "skipped": False}
         )
 
-    @patch("InquirerPy.base.complex.shutil.get_terminal_size")
+    @patch("InquirerPrompt.base.complex.shutil.get_terminal_size")
     def test_wrap_lines_offset(self, mocked_term):
         mocked_term.return_value = (24, 80)
         message = 15 * "i"

@@ -57,7 +57,7 @@ prompt documentation for more information.
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 result = prompt(
     questions=[
@@ -77,7 +77,7 @@ result = prompt(
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.select(
     message="Select one:",
@@ -124,7 +124,7 @@ In the following example:
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 keybindings = {
     "skip": [{"key": "c-c"}],
@@ -151,7 +151,7 @@ result = prompt(
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 keybindings = {
     "skip": [{"key": "c-c"}],
@@ -257,7 +257,7 @@ The {class}`~prompt_toolkit.key_binding.key_processor.KeyPressEvent` can give yo
 will provide you with the ability to exit the prompt application with custom result.
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 prompt = inquirer.select(
     message="Select item:",
@@ -280,7 +280,7 @@ result = prompt.execute()
 There are also some internal APIs you could leverage within the keybinding functions.
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 prompt = inquirer.select(
     message="Select item:",
@@ -306,8 +306,8 @@ result = prompt.execute()
 The following is a simpler example which will print "Hello World" on top of the prompt when pressing `alt-a`.
 
 ```{code-block} python
-from InquirerPy import inquirer
-from InquirerPy.utils import patched_print as print
+from InquirerPrompt import inquirer
+from InquirerPrompt.utils import patched_print as print
 
 name_prompt = inquirer.text(message="Name:")
 

@@ -6,24 +6,24 @@ from unittest.mock import ANY, call, patch
 
 from prompt_toolkit.shortcuts.prompt import PromptSession
 
-from InquirerPy.base.simple import BaseSimplePrompt
-from InquirerPy.enum import INQUIRERPY_KEYBOARD_INTERRUPT
-from InquirerPy.exceptions import InvalidArgument, RequiredKeyNotFound
-from InquirerPy.prompts import FuzzyPrompt
-from InquirerPy.prompts.confirm import ConfirmPrompt
-from InquirerPy.prompts.expand import ExpandPrompt
-from InquirerPy.prompts.filepath import FilePathPrompt
-from InquirerPy.prompts.input import InputPrompt
-from InquirerPy.prompts.list import ListPrompt
-from InquirerPy.prompts.secret import SecretPrompt
-from InquirerPy.resolver import prompt, prompt_async
-from InquirerPy.utils import InquirerPyStyle
+from InquirerPrompt.base.simple import BaseSimplePrompt
+from InquirerPrompt.enum import INQUIRERPY_KEYBOARD_INTERRUPT
+from InquirerPrompt.exceptions import InvalidArgument, RequiredKeyNotFound
+from InquirerPrompt.prompts import FuzzyPrompt
+from InquirerPrompt.prompts.confirm import ConfirmPrompt
+from InquirerPrompt.prompts.expand import ExpandPrompt
+from InquirerPrompt.prompts.filepath import FilePathPrompt
+from InquirerPrompt.prompts.input import InputPrompt
+from InquirerPrompt.prompts.list import ListPrompt
+from InquirerPrompt.prompts.secret import SecretPrompt
+from InquirerPrompt.resolver import prompt, prompt_async
+from InquirerPrompt.utils import InquirerPyStyle
 
 from .style import get_sample_style
 
 
 class TestResolver(unittest.TestCase):
-    @patch("InquirerPy.resolver.ConfirmPrompt.execute")
+    @patch("InquirerPrompt.resolver.ConfirmPrompt.execute")
     def test_exceptions(self, mocked_confirm):
         questions = "hello"
         self.assertRaises(InvalidArgument, prompt, questions)
@@ -448,7 +448,7 @@ class TestResolver(unittest.TestCase):
         mocked_execute.return_value = None
         prompt({"type": "input", "message": "Name:"})
 
-    @patch("InquirerPy.resolver.ConfirmPrompt.execute")
+    @patch("InquirerPrompt.resolver.ConfirmPrompt.execute")
     def test_prompt_async_exception(self, mocked_execute):
         questions = "hello"
         try:
@@ -458,10 +458,10 @@ class TestResolver(unittest.TestCase):
         else:
             self.fail("InvalidArgument should be raised")
 
-    @patch("InquirerPy.resolver.ConfirmPrompt.__init__")
-    @patch("InquirerPy.resolver.InputPrompt.__init__")
-    @patch("InquirerPy.resolver.ConfirmPrompt.execute_async")
-    @patch("InquirerPy.resolver.InputPrompt.execute_async")
+    @patch("InquirerPrompt.resolver.ConfirmPrompt.__init__")
+    @patch("InquirerPrompt.resolver.InputPrompt.__init__")
+    @patch("InquirerPrompt.resolver.ConfirmPrompt.execute_async")
+    @patch("InquirerPrompt.resolver.InputPrompt.execute_async")
     def test_prompt_async(
         self, mocked_input, mocked_confirm, mocked_input_init, mocked_confirm_init
     ):

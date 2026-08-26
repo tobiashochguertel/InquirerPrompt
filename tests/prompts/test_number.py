@@ -4,8 +4,8 @@ from unittest.mock import ANY, call, patch
 
 from prompt_toolkit.keys import Keys
 
-from InquirerPy.exceptions import InvalidArgument
-from InquirerPy.prompts.number import NumberPrompt
+from InquirerPrompt.exceptions import InvalidArgument
+from InquirerPrompt.prompts.number import NumberPrompt
 
 
 class TestNumberPrompt(unittest.TestCase):
@@ -50,7 +50,7 @@ class TestNumberPrompt(unittest.TestCase):
         self.assertEqual(self.float_prompt._default, 1.0)
         self.assertTrue(self.float_prompt._is_float())
 
-    @patch("InquirerPy.prompts.number.NumberPrompt.register_kb")
+    @patch("InquirerPrompt.prompts.number.NumberPrompt.register_kb")
     def test_kb_registered(self, mocked_kb) -> None:
         prompt = NumberPrompt(message="")
         mocked_kb.assert_has_calls([call(Keys.Any)])
@@ -270,7 +270,7 @@ class TestNumberPrompt(unittest.TestCase):
             self.prompt._whole_buffer.cursor_position = 0
             self.prompt._handle_input(event)
 
-    @patch("InquirerPy.prompts.number.NumberPrompt._on_text_change")
+    @patch("InquirerPrompt.prompts.number.NumberPrompt._on_text_change")
     def test_on_text_change(self, mocked_text) -> None:
         self.prompt._whole_buffer.text = "10"
         mocked_text.assert_called()

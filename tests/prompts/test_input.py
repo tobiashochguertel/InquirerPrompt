@@ -9,8 +9,8 @@ from prompt_toolkit.input import create_pipe_input
 from prompt_toolkit.output import DummyOutput
 from prompt_toolkit.shortcuts.prompt import CompleteStyle
 
-from InquirerPy.enum import INQUIRERPY_POINTER_SEQUENCE
-from InquirerPy.prompts.input import InputPrompt
+from InquirerPrompt.enum import INQUIRERPY_POINTER_SEQUENCE
+from InquirerPrompt.prompts.input import InputPrompt
 
 
 class TestInputPrompt(unittest.TestCase):
@@ -176,12 +176,12 @@ class TestInputPrompt(unittest.TestCase):
             ],
         )
 
-    @patch("InquirerPy.prompts.input.NestedCompleter.from_nested_dict")
-    @patch("InquirerPy.prompts.input.SimpleLexer")
-    @patch("InquirerPy.prompts.input.InputPrompt._get_prompt_message")
-    @patch("InquirerPy.base.simple.Style.from_dict")
-    @patch("InquirerPy.base.simple.KeyBindings")
-    @patch("InquirerPy.prompts.input.PromptSession")
+    @patch("InquirerPrompt.prompts.input.NestedCompleter.from_nested_dict")
+    @patch("InquirerPrompt.prompts.input.SimpleLexer")
+    @patch("InquirerPrompt.prompts.input.InputPrompt._get_prompt_message")
+    @patch("InquirerPrompt.base.simple.Style.from_dict")
+    @patch("InquirerPrompt.base.simple.KeyBindings")
+    @patch("InquirerPrompt.prompts.input.PromptSession")
     def test_callable_called(
         self,
         MockedSession,
@@ -226,7 +226,7 @@ class TestInputPrompt(unittest.TestCase):
         )
         MockedLexer.assert_has_calls([call("class:input")])
 
-    @patch("InquirerPy.prompts.input.PromptSession")
+    @patch("InquirerPrompt.prompts.input.PromptSession")
     def test_long_instruction(self, MockedSession):
         InputPrompt(message="", long_instruction="asfasdf")
 

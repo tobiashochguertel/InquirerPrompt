@@ -1,7 +1,7 @@
 import os
 
-from InquirerPy import prompt
-from InquirerPy.validator import PathValidator
+from InquirerPrompt import prompt
+from InquirerPrompt.validator import PathValidator
 
 
 def main():

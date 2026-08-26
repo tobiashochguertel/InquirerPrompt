@@ -53,10 +53,10 @@ repository = "https://github.com/tobiashochguertel/InquirerPrompt"
 documentation = "https://InquirerPrompt.readthedocs.io"
 
 [tool.hatch.build.targets.wheel]
-packages = ["InquirerPy"]
+packages = ["InquirerPrompt"]
 
 [tool.hatch.build.targets.wheel.force-include]
-"InquirerPy/py.typed" = "InquirerPy/py.typed"
+"InquirerPrompt/py.typed" = "InquirerPrompt/py.typed"
 
 [dependency-groups]
 dev = [
@@ -72,7 +72,7 @@ dev = [
 ]
 
 [tool.coverage.run]
-source = ["InquirerPy"]
+source = ["InquirerPrompt"]
 
 [tool.coverage.report]
 ignore_errors = true
@@ -115,7 +115,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["InquirerPy"]
+known-first-party = ["InquirerPrompt"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "pep257"

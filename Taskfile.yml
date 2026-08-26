@@ -2,10 +2,10 @@
 version: "3"
 
 vars:
-  PACKAGE: InquirerPy
+  PACKAGE: InquirerPrompt
   PYTHON: python3
   POETRY: poetry
-  SRC_DIR: InquirerPy
+  SRC_DIR: InquirerPrompt
   TEST_DIR: tests
 
 tasks:

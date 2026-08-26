@@ -4,15 +4,15 @@ from typing import Any, Callable, List, Optional, Tuple, Union
 
 from prompt_toolkit.validation import ValidationError
 
-from InquirerPy.base import FakeDocument, InquirerPyUIListControl
-from InquirerPy.enum import (
+from InquirerPrompt.base import FakeDocument, InquirerPyUIListControl
+from InquirerPrompt.enum import (
     INQUIRERPY_EMPTY_CIRCLE_SEQUENCE,
     INQUIRERPY_FILL_CIRCLE_SEQUENCE,
     INQUIRERPY_POINTER_SEQUENCE,
 )
-from InquirerPy.prompts.list import ListPrompt
-from InquirerPy.separator import Separator
-from InquirerPy.utils import (
+from InquirerPrompt.prompts.list import ListPrompt
+from InquirerPrompt.separator import Separator
+from InquirerPrompt.utils import (
     InquirerPyKeybindings,
     InquirerPyListChoices,
     InquirerPyMessage,
@@ -165,7 +165,7 @@ class CheckboxPrompt(ListPrompt):
             leaving ghost output from previous iterations on screen.
 
     Examples:
-        >>> from InquirerPy import inquirer
+        >>> from InquirerPrompt import inquirer
         >>> result = inquirer.checkbox(message="Select:", choices=[1, 2, 3]).execute()
         >>> print(result)
         [1]

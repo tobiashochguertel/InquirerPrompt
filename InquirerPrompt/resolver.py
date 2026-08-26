@@ -5,18 +5,18 @@ A `PyInquirer <https://github.com/CITGuru/PyInquirer>`_ compatible entrypoint :f
 
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-from InquirerPy.exceptions import InvalidArgument, RequiredKeyNotFound
-from InquirerPy.prompts.checkbox import CheckboxPrompt
-from InquirerPy.prompts.confirm import ConfirmPrompt
-from InquirerPy.prompts.expand import ExpandPrompt
-from InquirerPy.prompts.filepath import FilePathPrompt
-from InquirerPy.prompts.fuzzy import FuzzyPrompt
-from InquirerPy.prompts.input import InputPrompt
-from InquirerPy.prompts.list import ListPrompt
-from InquirerPy.prompts.number import NumberPrompt
-from InquirerPy.prompts.rawlist import RawlistPrompt
-from InquirerPy.prompts.secret import SecretPrompt
-from InquirerPy.utils import (
+from InquirerPrompt.exceptions import InvalidArgument, RequiredKeyNotFound
+from InquirerPrompt.prompts.checkbox import CheckboxPrompt
+from InquirerPrompt.prompts.confirm import ConfirmPrompt
+from InquirerPrompt.prompts.expand import ExpandPrompt
+from InquirerPrompt.prompts.filepath import FilePathPrompt
+from InquirerPrompt.prompts.fuzzy import FuzzyPrompt
+from InquirerPrompt.prompts.input import InputPrompt
+from InquirerPrompt.prompts.list import ListPrompt
+from InquirerPrompt.prompts.number import NumberPrompt
+from InquirerPrompt.prompts.rawlist import RawlistPrompt
+from InquirerPrompt.prompts.secret import SecretPrompt
+from InquirerPrompt.utils import (
     InquirerPyKeybindings,
     InquirerPyQuestions,
     InquirerPySessionResult,
@@ -157,8 +157,8 @@ def prompt(
         InvalidArgument: When the provided `questions` argument is not a type of :class:`list` nor :class:`dictionary`.
 
     Examples:
-        >>> from InquirerPy import prompt
-        >>> from InquirerPy.validator import NumberValidator
+        >>> from InquirerPrompt import prompt
+        >>> from InquirerPrompt.validator import NumberValidator
         >>> questions = [
         ...     {
         ...         "type": "input",

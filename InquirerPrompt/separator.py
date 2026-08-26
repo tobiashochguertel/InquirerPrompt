@@ -10,7 +10,7 @@ class Separator:
         line: Content to display as the separator.
 
     Example:
-        >>> from InquirerPy import inquirer
+        >>> from InquirerPrompt import inquirer
         >>> choices = [1, 2, Separator(), 3]
         >>> inquirer.select(message="", choices=choices)
     """

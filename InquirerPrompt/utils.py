@@ -26,12 +26,12 @@ from prompt_toolkit.formatted_text import (
 from prompt_toolkit.styles import Style
 from prompt_toolkit.validation import Validator
 
-from InquirerPy.exceptions import InvalidArgument
+from InquirerPrompt.exceptions import InvalidArgument
 
 if TYPE_CHECKING:
     from prompt_toolkit.filters.base import FilterOrBool
 
-    from InquirerPy.base.control import Choice
+    from InquirerPrompt.base.control import Choice
 
 __all__ = [
     "get_style",
@@ -101,8 +101,8 @@ def get_style(
         An instance of :class:`.InquirerPyStyle`.
 
     Examples:
-        >>> from InquirerPy import get_style
-        >>> from InquirerPy import inquirer
+        >>> from InquirerPrompt import get_style
+        >>> from InquirerPrompt import inquirer
         >>> style = get_style(
         ...     {"questionmark": "#ffffff", "answer": "#000000"}, style_override=False
         ... )
@@ -317,7 +317,7 @@ def expand_formatted_text(style: str, name: Any) -> StyleAndTextTuples:
     This enables per-choice coloring::
 
         from prompt_toolkit.formatted_text import HTML
-        from InquirerPy.base.control import Choice
+        from InquirerPrompt.base.control import Choice
 
         choices = [
             Choice("ok", name=HTML("<ansigreen>✓ OK</ansigreen>")),

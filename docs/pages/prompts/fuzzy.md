@@ -92,7 +92,7 @@ The `default` parameter for this prompt will set the default search text in the 
 If you wish to pre-select certain choices, you can leverage the `enabled` parameter/key of each choice.
 
 ```{code-block} python
-from InquirerPy.base import Choice
+from InquirerPrompt.base import Choice
 
 choices = [
     Choice(1, enabled=True),  # enabled by default
@@ -109,7 +109,7 @@ by using the parameter `match_exact`.
   <summary>Classic Syntax (PyInquirer)</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 questions = [
     {
@@ -130,7 +130,7 @@ result = prompt(questions=questions)
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.fuzzy(
     message="Select actions:",
@@ -148,7 +148,7 @@ You can also enable a keybinding to toggle the matching algorithm.
   <summary>Classic Syntax (PyInquirer)</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
+from InquirerPrompt import prompt
 
 questions = [
     {
@@ -168,7 +168,7 @@ result = prompt(questions=questions)
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
+from InquirerPrompt import inquirer
 
 result = inquirer.fuzzy(
     message="Select actions:",

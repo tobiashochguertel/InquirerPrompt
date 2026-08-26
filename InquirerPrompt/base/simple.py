@@ -22,9 +22,9 @@ from prompt_toolkit.keys import Keys
 from prompt_toolkit.styles.style import Style
 from prompt_toolkit.validation import Validator
 
-from InquirerPy.enum import INQUIRERPY_KEYBOARD_INTERRUPT
-from InquirerPy.exceptions import RequiredKeyNotFound
-from InquirerPy.utils import (
+from InquirerPrompt.enum import INQUIRERPY_KEYBOARD_INTERRUPT
+from InquirerPrompt.exceptions import RequiredKeyNotFound
+from InquirerPrompt.utils import (
     InquirerPyMessage,
     InquirerPySessionResult,
     InquirerPyStyle,

@@ -20,8 +20,8 @@ Let's take the `message` and `default` key as an example, in certain scenario, y
 In the following example, the second prompt will set the `default` value based on the result from the first prompt. And the third prompt will display the `message` based on the result from second prompt.
 
 ```python
-from InquirerPy import prompt
-from InquirerPy.validator import NumberValidator
+from InquirerPrompt import prompt
+from InquirerPrompt.validator import NumberValidator
 
 def get_message(result):
     return f"Hi {result['confirm_name']}, enter your age:"
@@ -55,8 +55,8 @@ When using {ref}`pages/inquirer:inquirer`, you will receive the result immediate
 perform your logic to generate the parameters dynamically after each prompt execution.
 
 ```
-from InquirerPy import inquirer
-from InquirerPy.validator import NumberValidator
+from InquirerPrompt import inquirer
+from InquirerPrompt.validator import NumberValidator
 
 name = inquirer.text(message="Name:").execute()
 confirm_name = inquirer.text(message="Confirm Name:", default=name).execute()
@@ -78,8 +78,8 @@ The following is not a good example that make the code shorter or cleaner..but i
 ```
 
 ```python
-from InquirerPy import inquirer
-from InquirerPy.validator import NumberValidator
+from InquirerPrompt import inquirer
+from InquirerPrompt.validator import NumberValidator
 
 name = inquirer.text(message="Name:").execute()
 confirm_name = inquirer.text(message="Confirm Name:", default=lambda _:name).execute()
@@ -182,9 +182,9 @@ Each choice can be the following types:
   <summary>Classic Syntax (PyInquirer)</summary>
 
 ```{code-block} python
-from InquirerPy import prompt
-from InquirerPy.base.control import Choice
-from InquirerPy.separator import Separator
+from InquirerPrompt import prompt
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.separator import Separator
 
 questions = [
     {
@@ -211,9 +211,9 @@ result = prompt(questions=questions)
   <summary>Alternate Syntax</summary>
 
 ```{code-block} python
-from InquirerPy import inquirer
-from InquirerPy.base.control import Choice
-from InquirerPy.separator import Separator
+from InquirerPrompt import inquirer
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.separator import Separator
 
 region = inquirer.select(
     message="Select regions:",
@@ -262,8 +262,8 @@ from {ref}`pages/prompts/input:InputPrompt` is type of {class}`string` by defaul
   <summary>Classic Syntax</summary>
 
 ```python
-from InquirerPy import prompt
-from InquirerPy.validator import NumberValidator
+from InquirerPrompt import prompt
+from InquirerPrompt.validator import NumberValidator
 
 questions = [
     {
@@ -283,8 +283,8 @@ result = prompt(questions=questions)
   <summary>Alternate Syntax</summary>
 
 ```python
-from InquirerPy import inquirer
-from InquirerPy.validator import NumberValidator
+from InquirerPrompt import inquirer
+from InquirerPrompt.validator import NumberValidator
 
 age = inquirer.text(
     message="Age:", filter=lambda result: int(result), validate=NumberValidator()
@@ -330,8 +330,8 @@ unnecessary clutter of texts and may cause the displayed information become less
 Without transformer: ? Select regions: ["us-east-1", "us-west-1"]
 With transformer: ? Select regions: 2 regions selected
 """
-from InquirerPy import prompt
-from InquirerPy.base.control import Choice
+from InquirerPrompt import prompt
+from InquirerPrompt.base.control import Choice
 
 choices = [
     Choice("ap-southeast-2", name="Sydney", enabled=True),
@@ -363,8 +363,8 @@ result = prompt(questions=questions)
 Without transformer: ? Select regions: ["us-east-1", "us-west-1"]
 With transformer: ? Select regions: 2 regions selected
 """
-from InquirerPy import inquirer
-from InquirerPy.base.control import Choice
+from InquirerPrompt import inquirer
+from InquirerPrompt.base.control import Choice
 
 choices = [
     Choice("ap-southeast-2", name="Sydney", enabled=True),

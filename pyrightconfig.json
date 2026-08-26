@@ -6,5 +6,5 @@
   "reportIncompatibleMethodOverride": "none",
   "reportIncompatibleVariableOverride": "none",
   "reportGeneralTypeIssues": "none",
-  "exclude": [ "**/__init__.py", "./InquirerPy/inquirer.py" ]
+  "exclude": [ "**/__init__.py", "./InquirerPrompt/inquirer.py" ]
 }

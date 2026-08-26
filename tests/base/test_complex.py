@@ -3,8 +3,8 @@ from unittest.mock import ANY, call, patch
 
 from prompt_toolkit.validation import ValidationError, Validator
 
-from InquirerPy.base.complex import BaseComplexPrompt
-from InquirerPy.prompts.fuzzy import FuzzyPrompt
+from InquirerPrompt.base.complex import BaseComplexPrompt
+from InquirerPrompt.prompts.fuzzy import FuzzyPrompt
 
 
 class TestBaseComplex(unittest.TestCase):
@@ -241,8 +241,8 @@ class TestBaseComplex(unittest.TestCase):
             cycle=False,
         )
 
-    @patch("InquirerPy.base.complex.shutil.get_terminal_size")
-    @patch("InquirerPy.utils.shutil.get_terminal_size")
+    @patch("InquirerPrompt.base.complex.shutil.get_terminal_size")
+    @patch("InquirerPrompt.utils.shutil.get_terminal_size")
     def test_extra_lines_with_long_instruction(self, mocked_term, mocked_term2):
         mocked_term.return_value = (24, 80)
         mocked_term2.return_value = (24, 80)
@@ -281,8 +281,8 @@ class TestBaseComplex(unittest.TestCase):
         )
         self.assertEqual(prompt.extra_long_instruction_line_count, 1)
 
-    @patch("InquirerPy.base.complex.shutil.get_terminal_size")
-    @patch("InquirerPy.utils.shutil.get_terminal_size")
+    @patch("InquirerPrompt.base.complex.shutil.get_terminal_size")
+    @patch("InquirerPrompt.utils.shutil.get_terminal_size")
     def test_extra_lines_due_to_offset(self, mocked_term, mocked_term2):
         mocked_term.return_value = (24, 80)
         mocked_term2.return_value = (24, 80)
@@ -324,7 +324,7 @@ class TestBaseComplex(unittest.TestCase):
             (len(qmark) + 1 + len(message) + 1 + len(instruction) + 1 - 1) // 24,
         )
 
-    @patch("InquirerPy.base.complex.shutil.get_terminal_size")
+    @patch("InquirerPrompt.base.complex.shutil.get_terminal_size")
     def test_height_offset(self, mocked_term) -> None:
         mocked_term.return_value = (24, 80)
         message = 15 * "i"

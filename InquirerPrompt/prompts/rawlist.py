@@ -2,12 +2,12 @@
 
 from typing import Any, Callable, List, Optional, Tuple, Union
 
-from InquirerPy.base import InquirerPyUIListControl
-from InquirerPy.enum import INQUIRERPY_POINTER_SEQUENCE
-from InquirerPy.exceptions import InvalidArgument
-from InquirerPy.prompts.list import ListPrompt
-from InquirerPy.separator import Separator
-from InquirerPy.utils import (
+from InquirerPrompt.base import InquirerPyUIListControl
+from InquirerPrompt.enum import INQUIRERPY_POINTER_SEQUENCE
+from InquirerPrompt.exceptions import InvalidArgument
+from InquirerPrompt.prompts.list import ListPrompt
+from InquirerPrompt.separator import Separator
+from InquirerPrompt.utils import (
     InquirerPyDefault,
     InquirerPyKeybindings,
     InquirerPyListChoices,
@@ -177,7 +177,7 @@ class RawlistPrompt(ListPrompt):
         session_result: Used internally for :ref:`index:Classic Syntax (PyInquirer)`.
 
     Examples:
-        >>> from InquirerPy import inquirer
+        >>> from InquirerPrompt import inquirer
         >>> result = inquirer.rawlist(
         ...     message="Select one:", choices=[1, 2, 3]
         ... ).execute()

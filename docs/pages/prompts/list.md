@@ -113,8 +113,8 @@ of {class}`~InquirerPy.base.control.Choice` or {class}`dict`.
 The following example will have `1` and `2` pre-selected.
 
 ```{code-block} python
-from InquirerPy import inquirer
-from InquirerPy.base.control import Choice
+from InquirerPrompt import inquirer
+from InquirerPrompt.base.control import Choice
 
 choices = [
     Choice(1, enabled=True),
@@ -141,7 +141,7 @@ It should be the value of one of the choices.
 If you wish to pre-select certain choices in multiselect mode, you can leverage the `enabled` parameter/key of each choice.
 
 ```{code-block} python
-from InquirerPy.base import Choice
+from InquirerPrompt.base import Choice
 
 choices = [
     Choice(1, enabled=True),  # enabled by default

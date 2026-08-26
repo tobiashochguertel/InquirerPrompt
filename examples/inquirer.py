@@ -1,5 +1,5 @@
-from InquirerPy import inquirer
-from InquirerPy.validator import NumberValidator
+from InquirerPrompt import inquirer
+from InquirerPrompt.validator import NumberValidator
 
 age = inquirer.text(
     message="Enter your age:",

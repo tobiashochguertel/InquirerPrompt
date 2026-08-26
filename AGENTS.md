@@ -9,7 +9,7 @@ compatibility updates, and feature contributions that upstream hasn't merged.
 - **Upstream:** `kazhala/InquirerPy` (branch `master`)
 - **Fork main:** `main` (stable, tagged releases)
 - **Fork dev:** `dev` (integration branch — all feature branches merge here first)
-- **PyPI package:** `InquirerPrompt` (import name stays `InquirerPy`)
+- **PyPI package:** `InquirerPrompt` (import name: `InquirerPrompt`)
 
 ## Branch Model
 
@@ -86,8 +86,8 @@ git push origin dev
 ## Code Style
 
 - Python 3.9+ (type hints required)
-- Follow existing patterns in `InquirerPy/prompts/`
-- Use `expand_formatted_text()` from `InquirerPy.utils` for choice name rendering
+- Follow existing patterns in `InquirerPrompt/prompts/`
+- Use `expand_formatted_text()` from `InquirerPrompt.utils` for choice name rendering
 - Keep backward compatibility — plain string choice names must always work
 - Docstrings: Google style, matching existing prompts
 
@@ -95,13 +95,13 @@ git push origin dev
 
 | File | Purpose |
 |------|---------|
-| `InquirerPy/utils.py` | Shared utilities, `get_style()`, `expand_formatted_text()` |
-| `InquirerPy/base/control.py` | `Choice` dataclass, `InquirerPyUIListControl` |
-| `InquirerPy/base/complex.py` | `BaseComplexPrompt` — prompt message rendering |
-| `InquirerPy/prompts/list.py` | `ListPrompt` (select) — base for most list prompts |
-| `InquirerPy/prompts/checkbox.py` | `CheckboxPrompt` |
-| `InquirerPy/prompts/rawlist.py` | `RawlistPrompt` |
-| `InquirerPy/prompts/expand.py` | `ExpandPrompt` |
-| `InquirerPy/prompts/fuzzy.py` | `FuzzyPrompt` |
+| `InquirerPrompt/utils.py` | Shared utilities, `get_style()`, `expand_formatted_text()` |
+| `InquirerPrompt/base/control.py` | `Choice` dataclass, `InquirerPyUIListControl` |
+| `InquirerPrompt/base/complex.py` | `BaseComplexPrompt` — prompt message rendering |
+| `InquirerPrompt/prompts/list.py` | `ListPrompt` (select) — base for most list prompts |
+| `InquirerPrompt/prompts/checkbox.py` | `CheckboxPrompt` |
+| `InquirerPrompt/prompts/rawlist.py` | `RawlistPrompt` |
+| `InquirerPrompt/prompts/expand.py` | `ExpandPrompt` |
+| `InquirerPrompt/prompts/fuzzy.py` | `FuzzyPrompt` |
 | `tests/test_colored_choices.py` | Tests for HTML/ANSI/FormattedText choice names |
 | `examples/colored_choices.py` | Demo for colored choices |

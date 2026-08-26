@@ -1,15 +1,15 @@
 import unittest
 from unittest.mock import ANY, call, patch
 
-from InquirerPy.base import BaseComplexPrompt
-from InquirerPy.exceptions import InvalidArgument, RequiredKeyNotFound
-from InquirerPy.prompts.expand import (
+from InquirerPrompt.base import BaseComplexPrompt
+from InquirerPrompt.exceptions import InvalidArgument, RequiredKeyNotFound
+from InquirerPrompt.prompts.expand import (
     ExpandChoice,
     ExpandHelp,
     ExpandPrompt,
     InquirerPyExpandControl,
 )
-from InquirerPy.separator import Separator
+from InquirerPrompt.separator import Separator
 
 
 class TestExpandPrompt(unittest.TestCase):

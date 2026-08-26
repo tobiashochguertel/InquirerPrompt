@@ -16,8 +16,8 @@ while the prompt is still running.
 The following example will print "Hello World" above the prompt when `alt-b` is pressed.
 
 ```python
-from InquirerPy.utils import patched_print
-from InquirerPy import inquirer
+from InquirerPrompt.utils import patched_print
+from InquirerPrompt import inquirer
 
 prompt = inquirer.text(message="Name:")
 

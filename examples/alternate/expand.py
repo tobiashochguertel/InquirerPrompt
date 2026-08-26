@@ -1,6 +1,6 @@
-from InquirerPy import inquirer
-from InquirerPy.prompts.expand import ExpandChoice
-from InquirerPy.separator import Separator
+from InquirerPrompt import inquirer
+from InquirerPrompt.prompts.expand import ExpandChoice
+from InquirerPrompt.separator import Separator
 
 question1_choice = [
     ExpandChoice(key="a", name="Apple", value="Apple"),
