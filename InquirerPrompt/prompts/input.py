@@ -54,6 +54,11 @@ class InputPrompt(BaseSimplePrompt):
         multicolumn_complete: Change the auto-completion UI to a multi column display.
         multiline: Enable multiline edit. While multiline edit is active, pressing `enter` won't complete the answer.
             and will create a new line. Use `esc` followd by `enter` to complete the question.
+        open_in_editor: Enable the prompt's built-in "open in editor" keybinding.
+            In Emacs mode press `c-x c-e`; in Vi navigation mode press `v`.
+            The editor is read from `$VISUAL` or `$EDITOR`, falling back to `vi`.
+        tempfile: Path or callable used when opening the editor.
+        tempfile_suffix: File suffix for the temporary editor file (e.g. ``.md``).
         validate: Add validation to user input.
             Refer to :ref:`pages/validator:Validator` documentation for more details.
         invalid_message: Error message to display when user input is invalid.
@@ -96,6 +101,9 @@ class InputPrompt(BaseSimplePrompt):
         completer: Optional[Union[Dict[str, Optional[str]], "Completer"]] = None,
         multicolumn_complete: bool = False,
         multiline: bool = False,
+        open_in_editor: bool = False,
+        tempfile: Optional[Union[str, Callable[[], str]]] = None,
+        tempfile_suffix: Optional[Union[str, Callable[[], str]]] = None,
         validate: Optional[InquirerPyValidate] = None,
         invalid_message: str = "Invalid input",
         transformer: Optional[Callable[[str], Any]] = None,
@@ -138,6 +146,7 @@ class InputPrompt(BaseSimplePrompt):
         elif isinstance(completer, Completer):
             self._completer = completer
         self._multiline = multiline
+        self._open_in_editor = open_in_editor
         self._complete_style = (
             CompleteStyle.COLUMN
             if not multicolumn_complete
@@ -176,6 +185,9 @@ class InputPrompt(BaseSimplePrompt):
             multiline=self._multiline,
             complete_style=self._complete_style,
             wrap_lines=wrap_lines,
+            enable_open_in_editor=open_in_editor,
+            tempfile=tempfile,
+            tempfile_suffix=tempfile_suffix,
             bottom_toolbar=(
                 [("class:long_instruction", long_instruction)]
                 if long_instruction
@@ -223,7 +235,10 @@ class InputPrompt(BaseSimplePrompt):
         """
         if not pre_answer:
             if self._multiline and not self._instruction:
-                pre_answer = ("class:instruction", " ESC + Enter to finish input")
+                hint = " ESC + Enter to finish input"
+                if self._open_in_editor:
+                    hint += " · C-x C-e / v to edit"
+                pre_answer = ("class:instruction", hint)
             else:
                 pre_answer = (
                     "class:instruction",

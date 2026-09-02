@@ -254,6 +254,9 @@ class TestFilePath(unittest.TestCase):
             multiline=False,
             complete_style=CompleteStyle.MULTI_COLUMN,
             wrap_lines=True,
+            enable_open_in_editor=False,
+            tempfile=None,
+            tempfile_suffix=None,
             bottom_toolbar=None,
         )
 
