@@ -176,6 +176,27 @@ class TestInputPrompt(unittest.TestCase):
             ],
         )
 
+    def test_prompt_message_open_in_editor(self):
+        input_prompt = InputPrompt(
+            message="Enter your name",
+            style=None,
+            default="",
+            qmark="[?]",
+            vi_mode=False,
+            multiline=True,
+            open_in_editor=True,
+        )
+        message = input_prompt._get_prompt_message()
+        self.assertEqual(
+            message,
+            [
+                ("class:questionmark", "[?]"),
+                ("class:question", " Enter your name"),
+                ("class:instruction", " ESC + Enter to finish input · C-x C-e / v to edit"),
+                ("class:questionmark", "\n%s " % INQUIRERPY_POINTER_SEQUENCE),
+            ],
+        )
+
     @patch("InquirerPrompt.prompts.input.NestedCompleter.from_nested_dict")
     @patch("InquirerPrompt.prompts.input.SimpleLexer")
     @patch("InquirerPrompt.prompts.input.InputPrompt._get_prompt_message")
@@ -219,6 +240,9 @@ class TestInputPrompt(unittest.TestCase):
             multiline=True,
             complete_style=CompleteStyle.COLUMN,
             wrap_lines=True,
+            enable_open_in_editor=False,
+            tempfile=None,
+            tempfile_suffix=None,
             bottom_toolbar=None,
         )
         mocked_completer.assert_has_calls(
@@ -245,7 +269,41 @@ class TestInputPrompt(unittest.TestCase):
             multiline=False,
             complete_style=CompleteStyle.COLUMN,
             wrap_lines=True,
+            enable_open_in_editor=False,
+            tempfile=None,
+            tempfile_suffix=None,
             bottom_toolbar=[("class:long_instruction", "asfasdf")],
+        )
+
+    @patch("InquirerPrompt.prompts.input.PromptSession")
+    def test_open_in_editor_kwargs_passed(self, MockedSession):
+        InputPrompt(
+            message="",
+            multiline=True,
+            open_in_editor=True,
+            tempfile="/tmp/edit",
+            tempfile_suffix=".md",
+        )
+
+        MockedSession.assert_called_once_with(
+            message=ANY,
+            key_bindings=ANY,
+            style=ANY,
+            completer=ANY,
+            validator=ANY,
+            validate_while_typing=False,
+            input=None,
+            output=None,
+            editing_mode=EditingMode.EMACS,
+            lexer=ANY,
+            is_password=False,
+            multiline=True,
+            complete_style=CompleteStyle.COLUMN,
+            wrap_lines=True,
+            enable_open_in_editor=True,
+            tempfile="/tmp/edit",
+            tempfile_suffix=".md",
+            bottom_toolbar=None,
         )
 
     def test_handle_completion(self):
