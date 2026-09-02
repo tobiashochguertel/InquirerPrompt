@@ -140,6 +140,23 @@ Plain string choice names work as before — this feature is fully backward comp
 
 See the [Style](https://InquirerPrompt.readthedocs.io/en/latest/pages/style.html) documentation for available color classes and the `examples/colored_choices.py` demo script.
 
+### Open in Editor
+
+`text` prompts support `open_in_editor=True` so the user can switch to their default editor with the standard `prompt_toolkit` shortcuts (`C-x C-e` in Emacs mode, `v` in Vi navigation mode). This is especially useful for long, multi-line answers:
+
+```python
+from InquirerPrompt import inquirer
+
+result = inquirer.text(
+    message="Enter your notes:",
+    multiline=True,
+    open_in_editor=True,
+    tempfile_suffix=".md",
+).execute()
+```
+
+Use `tempfile_suffix` to give the temporary editor file a useful extension (e.g. `".md"` or `".py"`).
+
 ### Erase When Done
 
 All list-type prompts (`select`, `checkbox`, `rawlist`, `expand`, `fuzzy`, `number`) accept an `erase_when_done` parameter. When `True`, the prompt UI is erased from the terminal after the user answers — useful when prompts are used in a loop to avoid ghost lines accumulating.
@@ -164,7 +181,18 @@ create an issue or directly update README via a pull request.
 
 ### EditorPrompt
 
-`InquirerPy` does not support [editor](https://github.com/CITGuru/PyInquirer#editor---type-editor) prompt as of now.
+`text` prompts support an `open_in_editor=True` option that opens the user's default editor from within the input prompt. The temporary file is written with the current buffer and `$EDITOR`/`$VISUAL` is used to edit it. This covers the common use case of PyInquirer's `editor` type:
+
+```python
+from InquirerPrompt import inquirer
+
+result = inquirer.text(
+    message="Enter notes:",
+    multiline=True,
+    open_in_editor=True,
+    tempfile_suffix=".md",
+).execute()
+```
 
 ### CheckboxPrompt
 
