@@ -192,7 +192,10 @@ class TestInputPrompt(unittest.TestCase):
             [
                 ("class:questionmark", "[?]"),
                 ("class:question", " Enter your name"),
-                ("class:instruction", " ESC + Enter to finish input · C-x C-e / v to edit"),
+                (
+                    "class:instruction",
+                    " ESC + Enter to finish input · C-x C-e / v to edit",
+                ),
                 ("class:questionmark", "\n%s " % INQUIRERPY_POINTER_SEQUENCE),
             ],
         )
