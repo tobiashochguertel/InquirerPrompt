@@ -35,9 +35,11 @@ class TestExpandFormattedText(unittest.TestCase):
         result = expand_formatted_text(
             "class:pointer", HTML("<ansigreen>✓ OK</ansigreen>")
         )
+        # The outer style is merged with the fragment style so the pointer's
+        # background still applies to the hovered row.
         self.assertEqual(
             result,
-            [("class:ansigreen", "✓ OK")],
+            [("class:pointer class:ansigreen", "✓ OK")],
         )
 
     def test_html_multiple_tags(self):
@@ -49,9 +51,9 @@ class TestExpandFormattedText(unittest.TestCase):
         self.assertEqual(
             result,
             [
-                ("class:ansigreen", "Search: ✓"),
-                ("", "  "),
-                ("class:ansired", "AI: ✗"),
+                ("class:pointer class:ansigreen", "Search: ✓"),
+                ("class:pointer", "  "),
+                ("class:pointer class:ansired", "AI: ✗"),
             ],
         )
 
@@ -61,10 +63,10 @@ class TestExpandFormattedText(unittest.TestCase):
             "class:pointer", ANSI("\033[32mSearch: ✓\033[0m")
         )
         # ANSI parsing may produce per-character tuples; verify the text
-        # content is correct and the style is ansigreen.
+        # content is correct and the merged style is present.
         full_text = "".join(t[1] for t in result)
         self.assertEqual(full_text, "Search: ✓")
-        self.assertTrue(all(t[0] == "ansigreen" for t in result))
+        self.assertTrue(all(t[0] == "class:pointer ansigreen" for t in result))
 
     def test_formatted_text(self):
         """FormattedText objects are passed through as lists of tuples."""
@@ -74,7 +76,11 @@ class TestExpandFormattedText(unittest.TestCase):
         result = expand_formatted_text("class:pointer", ft)
         self.assertEqual(
             result,
-            [("class:ansigreen", "yes"), ("", " "), ("class:ansired", "no")],
+            [
+                ("class:pointer class:ansigreen", "yes"),
+                ("class:pointer", " "),
+                ("class:pointer class:ansired", "no"),
+            ],
         )
 
 
@@ -99,7 +105,7 @@ class TestListPromptColoredChoices(unittest.TestCase):
         # Should contain the expanded HTML, not a raw HTML string
         styles = [t[0] for t in hover]
         texts = [t[1] for t in hover]
-        self.assertIn("class:ansigreen", styles)
+        self.assertIn("class:pointer class:ansigreen", styles)
         self.assertIn("✓ OK", texts)
         # Should NOT contain the raw HTML tags
         self.assertFalse(any("<ansigreen>" in t for t in texts))
@@ -175,7 +181,7 @@ class TestCheckboxPromptColoredChoices(unittest.TestCase):
         hover = control._get_hover_text(control.choices[0])
         styles = [t[0] for t in hover]
         texts = [t[1] for t in hover]
-        self.assertIn("class:ansigreen", styles)
+        self.assertIn("class:pointer class:ansigreen", styles)
         self.assertIn("✓ OK", texts)
 
 
@@ -199,7 +205,7 @@ class TestRawlistPromptColoredChoices(unittest.TestCase):
         hover = control._get_hover_text(control.choices[0])
         styles = [t[0] for t in hover]
         texts = [t[1] for t in hover]
-        self.assertIn("class:ansigreen", styles)
+        self.assertIn("class:pointer class:ansigreen", styles)
         self.assertIn("✓ OK", texts)
 
 
@@ -225,7 +231,7 @@ class TestExpandPromptColoredChoices(unittest.TestCase):
         hover = control._get_hover_text(control.choices[0])
         styles = [t[0] for t in hover]
         texts = [t[1] for t in hover]
-        self.assertIn("class:ansigreen", styles)
+        self.assertIn("class:pointer class:ansigreen", styles)
         self.assertIn("✓ OK", texts)
 
 
