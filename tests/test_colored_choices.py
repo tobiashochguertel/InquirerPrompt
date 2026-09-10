@@ -16,7 +16,7 @@ from InquirerPrompt.prompts.expand import (
     ExpandHelp,
     InquirerPyExpandControl,
 )
-from InquirerPrompt.prompts.list import InquirerPyListControl
+from InquirerPrompt.prompts.list import InquirerPyListControl, ListPrompt
 from InquirerPrompt.prompts.rawlist import InquirerPyRawlistControl
 from InquirerPrompt.separator import Separator
 from InquirerPrompt.utils import expand_formatted_text
@@ -258,6 +258,44 @@ class TestChoiceDataclass(unittest.TestCase):
     def test_choice_name_defaults_to_str_value(self):
         c = Choice(42)
         self.assertEqual(c.name, "42")
+
+
+class TestAnsweredMessageFormatting(unittest.TestCase):
+    """Test that formatted choice names are unwrapped in the answered message."""
+
+    def test_single_select_formatted_name(self):
+        """A single formatted name is rendered as plain text after answering."""
+        prompt = ListPrompt(
+            message="Pick:",
+            choices=[Choice("ok", name=ANSI("\033[32m✓ OK\033[0m"))],
+        )
+        prompt.status["answered"] = True
+        prompt.status["result"] = ANSI("\033[32m✓ OK\033[0m")
+        text = "".join(t[1] for t in prompt._get_prompt_message())
+        self.assertIn("✓ OK", text)
+        self.assertNotIn("ANSI(", text)
+
+    def test_multiselect_formatted_names(self):
+        """Formatted names nested in a multiselect result are unwrapped."""
+        prompt = ListPrompt(
+            message="Pick:",
+            choices=[Choice("ok", name=ANSI("\033[32m✓ OK\033[0m")), "no"],
+            multiselect=True,
+        )
+        prompt.status["answered"] = True
+        prompt.status["result"] = [ANSI("\033[32m✓ OK\033[0m"), "no"]
+        text = "".join(t[1] for t in prompt._get_prompt_message())
+        self.assertIn("✓ OK", text)
+        self.assertIn("'no'", text)
+        self.assertNotIn("ANSI(", text)
+
+    def test_plain_multiselect_result_unchanged(self):
+        """Plain string results keep the original list representation."""
+        prompt = ListPrompt(message="Pick:", choices=["ok", "no"], multiselect=True)
+        prompt.status["answered"] = True
+        prompt.status["result"] = ["ok", "no"]
+        text = "".join(t[1] for t in prompt._get_prompt_message())
+        self.assertIn("['ok', 'no']", text)
 
 
 if __name__ == "__main__":
