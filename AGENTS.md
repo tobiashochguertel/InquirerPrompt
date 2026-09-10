@@ -85,7 +85,7 @@ git push origin dev
 
 ## Code Style
 
-- Python 3.9+ (type hints required)
+- Python 3.10+ (type hints required)
 - Follow existing patterns in `InquirerPrompt/prompts/`
 - Use `expand_formatted_text()` from `InquirerPrompt.utils` for choice name rendering
 - Keep backward compatibility — plain string choice names must always work

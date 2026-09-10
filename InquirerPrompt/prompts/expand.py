@@ -100,7 +100,7 @@ class InquirerPyExpandControl(InquirerPyUIListControl):
         try:
             count = 0
             separator_count = 0
-            for raw_choice, choice in zip(self._raw_choices, self.choices):  # type: ignore
+            for raw_choice, choice in zip(self._raw_choices, self.choices, strict=True):  # type: ignore
                 if (
                     not isinstance(raw_choice, dict)
                     and not isinstance(raw_choice, Separator)

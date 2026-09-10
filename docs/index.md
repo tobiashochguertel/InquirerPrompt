@@ -10,7 +10,7 @@
 ## Install
 
 ```{admonition} Requirements
-python >= 3.9
+python >= 3.10
 ```
 
 ```
