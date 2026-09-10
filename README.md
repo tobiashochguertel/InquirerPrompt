@@ -70,7 +70,7 @@ Leveraging [prompt_toolkit](https://github.com/prompt-toolkit/python-prompt-tool
 ### Python
 
 ```
-python >= 3.9
+python >= 3.10
 ```
 
 ## Getting Started
@@ -140,6 +140,82 @@ Plain string choice names work as before — this feature is fully backward comp
 
 See the [Style](https://InquirerPrompt.readthedocs.io/en/latest/pages/style.html) documentation for available color classes and the `examples/colored_choices.py` demo script.
 
+### Rich Renderables
+
+With the optional [`rich`](https://rich.readthedocs.io) extra, `rich_to_ansi` renders rich renderables (or strings containing rich markup) into prompt_toolkit formatted text, usable anywhere formatted text is accepted — including choice names:
+
+```sh
+pip install "InquirerPrompt[rich]"
+```
+
+```python
+from rich.text import Text
+
+from InquirerPrompt import inquirer
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.utils import rich_to_ansi
+
+result = inquirer.select(
+    message="Select a status:",
+    choices=[
+        Choice("ok", name=rich_to_ansi("[bold green]✓ OK[/bold green]")),
+        Choice("warn", name=rich_to_ansi("[bold yellow]⚠ Warning[/bold yellow]")),
+        Choice("err", name=rich_to_ansi("[bold red]✗ Error[/bold red]")),
+        Choice("zsh", name=rich_to_ansi(Text("zsh", style="bright_cyan"))),
+    ],
+    border=True,
+).execute()
+```
+
+Keep choice names single-line (or pass `width`) when using rich renderables as choice names.
+
+See the [rich renderables](https://InquirerPrompt.readthedocs.io/en/latest/pages/rich.html) documentation and the `examples/rich_choices.py` demo script.
+
+### Preview Prompt
+
+`select` prompts can display a live preview pane for the highlighted choice. The
+`preview` callable receives the choice value and may return a plain string, a
+`prompt_toolkit` formatted text object, or a rich renderable (with the
+`InquirerPrompt[rich]` extra):
+
+```python
+from rich.panel import Panel
+
+from InquirerPrompt import inquirer
+
+
+def render_preview(value):
+    return Panel(f"Details for {value}", border_style="green")
+
+
+result = inquirer.preview(
+    message="Select an option:",
+    choices=["one", "two", "three"],
+    preview=render_preview,
+    preview_height=7,
+).execute()
+```
+
+See the [preview](https://InquirerPrompt.readthedocs.io/en/latest/pages/prompts/preview.html)
+documentation and the `examples/alternate/preview.py` demo script.
+
+### Open in Editor
+
+`text` prompts support `open_in_editor=True` so the user can switch to their default editor with the standard `prompt_toolkit` shortcuts (`C-x C-e` in Emacs mode, `v` in Vi navigation mode). This is especially useful for long, multi-line answers:
+
+```python
+from InquirerPrompt import inquirer
+
+result = inquirer.text(
+    message="Enter your notes:",
+    multiline=True,
+    open_in_editor=True,
+    tempfile_suffix=".md",
+).execute()
+```
+
+Use `tempfile_suffix` to give the temporary editor file a useful extension (e.g. `".md"` or `".py"`).
+
 ### Erase When Done
 
 All list-type prompts (`select`, `checkbox`, `rawlist`, `expand`, `fuzzy`, `number`) accept an `erase_when_done` parameter. When `True`, the prompt UI is erased from the terminal after the user answers — useful when prompts are used in a loop to avoid ghost lines accumulating.
@@ -164,7 +240,18 @@ create an issue or directly update README via a pull request.
 
 ### EditorPrompt
 
-`InquirerPy` does not support [editor](https://github.com/CITGuru/PyInquirer#editor---type-editor) prompt as of now.
+`text` prompts support an `open_in_editor=True` option that opens the user's default editor from within the input prompt. The temporary file is written with the current buffer and `$EDITOR`/`$VISUAL` is used to edit it. This covers the common use case of PyInquirer's `editor` type:
+
+```python
+from InquirerPrompt import inquirer
+
+result = inquirer.text(
+    message="Enter notes:",
+    multiline=True,
+    open_in_editor=True,
+    tempfile_suffix=".md",
+).execute()
+```
 
 ### CheckboxPrompt
 

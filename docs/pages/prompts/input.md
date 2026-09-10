@@ -124,6 +124,25 @@ from InquirerPrompt import inquirer
 result = inquirer.text(message="FooBoo:", multiline=True).execute()
 ```
 
+## Open in Editor
+
+By setting the parameter `open_in_editor` to `True`, users can press a shortcut to open the current buffer in an
+external editor. In Emacs mode press `C-x C-e`; in Vi navigation mode press `v`. The editor is read from `$VISUAL` or
+`$EDITOR`, falling back to `vi`. After saving and closing the editor, the prompt accepts the edited text.
+
+Use `tempfile_suffix` (for example, `".md"`) to give the temporary editor file a useful extension.
+
+```{code-block} python
+from InquirerPrompt import inquirer
+
+result = inquirer.text(
+    message="Enter your notes:",
+    multiline=True,
+    open_in_editor=True,
+    tempfile_suffix=".md",
+).execute()
+```
+
 ## Reference
 
 ```{eval-rst}

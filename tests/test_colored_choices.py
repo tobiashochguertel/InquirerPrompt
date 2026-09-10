@@ -16,7 +16,7 @@ from InquirerPrompt.prompts.expand import (
     ExpandHelp,
     InquirerPyExpandControl,
 )
-from InquirerPrompt.prompts.list import InquirerPyListControl
+from InquirerPrompt.prompts.list import InquirerPyListControl, ListPrompt
 from InquirerPrompt.prompts.rawlist import InquirerPyRawlistControl
 from InquirerPrompt.separator import Separator
 from InquirerPrompt.utils import expand_formatted_text
@@ -35,9 +35,11 @@ class TestExpandFormattedText(unittest.TestCase):
         result = expand_formatted_text(
             "class:pointer", HTML("<ansigreen>✓ OK</ansigreen>")
         )
+        # The outer style is merged with the fragment style so the pointer's
+        # background still applies to the hovered row.
         self.assertEqual(
             result,
-            [("class:ansigreen", "✓ OK")],
+            [("class:pointer class:ansigreen", "✓ OK")],
         )
 
     def test_html_multiple_tags(self):
@@ -49,9 +51,9 @@ class TestExpandFormattedText(unittest.TestCase):
         self.assertEqual(
             result,
             [
-                ("class:ansigreen", "Search: ✓"),
-                ("", "  "),
-                ("class:ansired", "AI: ✗"),
+                ("class:pointer class:ansigreen", "Search: ✓"),
+                ("class:pointer", "  "),
+                ("class:pointer class:ansired", "AI: ✗"),
             ],
         )
 
@@ -61,10 +63,10 @@ class TestExpandFormattedText(unittest.TestCase):
             "class:pointer", ANSI("\033[32mSearch: ✓\033[0m")
         )
         # ANSI parsing may produce per-character tuples; verify the text
-        # content is correct and the style is ansigreen.
+        # content is correct and the merged style is present.
         full_text = "".join(t[1] for t in result)
         self.assertEqual(full_text, "Search: ✓")
-        self.assertTrue(all(t[0] == "ansigreen" for t in result))
+        self.assertTrue(all(t[0] == "class:pointer ansigreen" for t in result))
 
     def test_formatted_text(self):
         """FormattedText objects are passed through as lists of tuples."""
@@ -74,7 +76,11 @@ class TestExpandFormattedText(unittest.TestCase):
         result = expand_formatted_text("class:pointer", ft)
         self.assertEqual(
             result,
-            [("class:ansigreen", "yes"), ("", " "), ("class:ansired", "no")],
+            [
+                ("class:pointer class:ansigreen", "yes"),
+                ("class:pointer", " "),
+                ("class:pointer class:ansired", "no"),
+            ],
         )
 
 
@@ -99,7 +105,7 @@ class TestListPromptColoredChoices(unittest.TestCase):
         # Should contain the expanded HTML, not a raw HTML string
         styles = [t[0] for t in hover]
         texts = [t[1] for t in hover]
-        self.assertIn("class:ansigreen", styles)
+        self.assertIn("class:pointer class:ansigreen", styles)
         self.assertIn("✓ OK", texts)
         # Should NOT contain the raw HTML tags
         self.assertFalse(any("<ansigreen>" in t for t in texts))
@@ -175,7 +181,7 @@ class TestCheckboxPromptColoredChoices(unittest.TestCase):
         hover = control._get_hover_text(control.choices[0])
         styles = [t[0] for t in hover]
         texts = [t[1] for t in hover]
-        self.assertIn("class:ansigreen", styles)
+        self.assertIn("class:pointer class:ansigreen", styles)
         self.assertIn("✓ OK", texts)
 
 
@@ -199,7 +205,7 @@ class TestRawlistPromptColoredChoices(unittest.TestCase):
         hover = control._get_hover_text(control.choices[0])
         styles = [t[0] for t in hover]
         texts = [t[1] for t in hover]
-        self.assertIn("class:ansigreen", styles)
+        self.assertIn("class:pointer class:ansigreen", styles)
         self.assertIn("✓ OK", texts)
 
 
@@ -225,7 +231,7 @@ class TestExpandPromptColoredChoices(unittest.TestCase):
         hover = control._get_hover_text(control.choices[0])
         styles = [t[0] for t in hover]
         texts = [t[1] for t in hover]
-        self.assertIn("class:ansigreen", styles)
+        self.assertIn("class:pointer class:ansigreen", styles)
         self.assertIn("✓ OK", texts)
 
 
@@ -252,6 +258,44 @@ class TestChoiceDataclass(unittest.TestCase):
     def test_choice_name_defaults_to_str_value(self):
         c = Choice(42)
         self.assertEqual(c.name, "42")
+
+
+class TestAnsweredMessageFormatting(unittest.TestCase):
+    """Test that formatted choice names are unwrapped in the answered message."""
+
+    def test_single_select_formatted_name(self):
+        """A single formatted name is rendered as plain text after answering."""
+        prompt = ListPrompt(
+            message="Pick:",
+            choices=[Choice("ok", name=ANSI("\033[32m✓ OK\033[0m"))],
+        )
+        prompt.status["answered"] = True
+        prompt.status["result"] = ANSI("\033[32m✓ OK\033[0m")
+        text = "".join(t[1] for t in prompt._get_prompt_message())
+        self.assertIn("✓ OK", text)
+        self.assertNotIn("ANSI(", text)
+
+    def test_multiselect_formatted_names(self):
+        """Formatted names nested in a multiselect result are unwrapped."""
+        prompt = ListPrompt(
+            message="Pick:",
+            choices=[Choice("ok", name=ANSI("\033[32m✓ OK\033[0m")), "no"],
+            multiselect=True,
+        )
+        prompt.status["answered"] = True
+        prompt.status["result"] = [ANSI("\033[32m✓ OK\033[0m"), "no"]
+        text = "".join(t[1] for t in prompt._get_prompt_message())
+        self.assertIn("✓ OK", text)
+        self.assertIn("'no'", text)
+        self.assertNotIn("ANSI(", text)
+
+    def test_plain_multiselect_result_unchanged(self):
+        """Plain string results keep the original list representation."""
+        prompt = ListPrompt(message="Pick:", choices=["ok", "no"], multiselect=True)
+        prompt.status["answered"] = True
+        prompt.status["result"] = ["ok", "no"]
+        text = "".join(t[1] for t in prompt._get_prompt_message())
+        self.assertIn("['ok', 'no']", text)
 
 
 if __name__ == "__main__":

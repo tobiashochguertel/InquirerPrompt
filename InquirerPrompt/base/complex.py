@@ -7,6 +7,13 @@ from typing import Any, Callable, List, Optional, Tuple, Union
 from prompt_toolkit.application import Application
 from prompt_toolkit.enums import EditingMode
 from prompt_toolkit.filters.base import Condition, FilterOrBool
+from prompt_toolkit.formatted_text import (
+    ANSI,
+    HTML,
+    FormattedText,
+    fragment_list_to_text,
+    to_formatted_text,
+)
 from prompt_toolkit.key_binding.key_bindings import KeyHandlerCallable
 from prompt_toolkit.keys import Keys
 
@@ -33,6 +40,27 @@ class FakeDocument:
 
     text: str
     cursor_position: int = 0
+
+
+def _format_result(result: Any) -> str:
+    """Format a prompt result for display in the answered message.
+
+    Formatted text objects (``HTML``, ``ANSI``, ``FormattedText``) are
+    unwrapped into their plain text, including formatted text objects nested
+    in a list (multiselect results). Anything else keeps the original
+    ``str`` representation.
+
+    Args:
+        result: The raw prompt result.
+
+    Returns:
+        The display representation of the result.
+    """
+    if isinstance(result, (HTML, ANSI, FormattedText)):
+        return fragment_list_to_text(to_formatted_text(result))
+    if isinstance(result, list):
+        return str([_format_result(item) for item in result])
+    return str(result)
 
 
 class BaseComplexPrompt(BaseSimplePrompt):
@@ -201,24 +229,7 @@ class BaseComplexPrompt(BaseSimplePrompt):
             "class:instruction",
             " %s " % self.instruction if self.instruction else " ",
         )
-        result = self.status["result"]
-        # Check for prompt_toolkit formatted text objects (HTML/ANSI/FormattedText).
-        # Regular strings and lists (multiselect) use the original string formatting.
-        from prompt_toolkit.formatted_text import (
-            ANSI,
-            HTML,
-            FormattedText,
-            fragment_list_to_text,
-            to_formatted_text,
-        )
-
-        if isinstance(result, (HTML, ANSI, FormattedText)):
-            post_answer = (
-                "class:answer",
-                " %s" % fragment_list_to_text(to_formatted_text(result)),
-            )
-        else:
-            post_answer = ("class:answer", " %s" % result)
+        post_answer = ("class:answer", " %s" % _format_result(self.status["result"]))
         return super()._get_prompt_message(pre_answer, post_answer)
 
     def _run(self) -> Any:

@@ -14,6 +14,7 @@ __all__ = [
     "fuzzy",
     "text",
     "select",
+    "preview",
     "number",
     "rawlist",
     "secret",
@@ -27,5 +28,6 @@ from InquirerPrompt.prompts import FuzzyPrompt as fuzzy
 from InquirerPrompt.prompts import InputPrompt as text
 from InquirerPrompt.prompts import ListPrompt as select
 from InquirerPrompt.prompts import NumberPrompt as number
+from InquirerPrompt.prompts import PreviewPrompt as preview
 from InquirerPrompt.prompts import RawlistPrompt as rawlist
 from InquirerPrompt.prompts import SecretPrompt as secret

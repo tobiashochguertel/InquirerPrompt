@@ -3,12 +3,14 @@
 import math
 import os
 import shutil
+from io import StringIO
 from typing import (
     TYPE_CHECKING,
     Any,
     Callable,
     Dict,
     List,
+    Literal,
     NamedTuple,
     Optional,
     Tuple,
@@ -19,6 +21,7 @@ from prompt_toolkit import print_formatted_text
 from prompt_toolkit.application import run_in_terminal
 from prompt_toolkit.application.current import get_app
 from prompt_toolkit.formatted_text import (
+    ANSI,
     FormattedText,
     StyleAndTextTuples,
     to_formatted_text,
@@ -40,6 +43,7 @@ __all__ = [
     "patched_print",
     "color_print",
     "expand_formatted_text",
+    "rich_to_ansi",
 ]
 
 
@@ -73,6 +77,7 @@ InquirerPyDefault = Union[Any, Callable[["InquirerPySessionResult"], Any]]
 InquirerPyKeybindings = Dict[
     str, List[Dict[str, Union[str, "FilterOrBool", List[str]]]]
 ]
+ColorSystem = Literal["standard", "256", "truecolor"]
 
 
 def get_style(
@@ -125,6 +130,9 @@ def get_style(
             "pointer": os.getenv("INQUIRERPY_STYLE_POINTER", "#61afef"),
             "checkbox": os.getenv("INQUIRERPY_STYLE_CHECKBOX", "#98c379"),
             "separator": os.getenv("INQUIRERPY_STYLE_SEPARATOR", ""),
+            "preview_separator": os.getenv(
+                "INQUIRERPY_STYLE_PREVIEW_SEPARATOR", "#4b5263"
+            ),
             "skipped": os.getenv("INQUIRERPY_STYLE_SKIPPED", "#5c6370"),
             "validator": os.getenv("INQUIRERPY_STYLE_VALIDATOR", ""),
             "marker": os.getenv("INQUIRERPY_STYLE_MARKER", "#e5c07b"),
@@ -149,6 +157,7 @@ def get_style(
             "pointer": os.getenv("INQUIRERPY_STYLE_POINTER", ""),
             "checkbox": os.getenv("INQUIRERPY_STYLE_CHECKBOX", ""),
             "separator": os.getenv("INQUIRERPY_STYLE_SEPARATOR", ""),
+            "preview_separator": os.getenv("INQUIRERPY_STYLE_PREVIEW_SEPARATOR", ""),
             "skipped": os.getenv("INQUIRERPY_STYLE_SKIPPED", ""),
             "validator": os.getenv("INQUIRERPY_STYLE_VALIDATOR", ""),
             "marker": os.getenv("INQUIRERPY_STYLE_MARKER", ""),
@@ -357,3 +366,68 @@ def expand_formatted_text(style: str, name: Any) -> StyleAndTextTuples:
             merged = style
         result.append((merged, text))
     return result
+
+
+def rich_to_ansi(
+    renderable: Any,
+    width: Optional[int] = None,
+    color_system: ColorSystem = "truecolor",
+) -> ANSI:
+    """Render a `rich <https://rich.readthedocs.io>`_ renderable into prompt_toolkit formatted text.
+
+    This bridges `rich <https://rich.readthedocs.io>`_ with `prompt_toolkit`:
+    the returned :class:`~prompt_toolkit.formatted_text.ANSI` object can be used
+    anywhere formatted text is accepted, e.g. as a choice name in list prompts
+    or as the return value of a preview callable (see
+    :class:`~InquirerPrompt.prompts.preview.PreviewPrompt`).
+
+    Note:
+        Requires the optional ``rich`` dependency: ``pip install InquirerPrompt[rich]``.
+
+    Warning:
+        List prompts render choice names on a single line. Keep renderables
+        single-line or pass an explicit ``width`` when using them as choice names.
+
+    Args:
+        renderable: Any value accepted by :func:`rich.console.Console.print`,
+            including rich renderables (``Text``, ``Table``, ``Panel``, ...)
+            and strings containing rich markup.
+        width: Optional width used for wrapping. Defaults to rich's ``80``
+            column default.
+        color_system: Color system rich should emit, one of ``"standard"``,
+            ``"256"`` or ``"truecolor"``.
+
+    Returns:
+        An :class:`~prompt_toolkit.formatted_text.ANSI` instance.
+
+    Raises:
+        InvalidArgument: When the optional ``rich`` dependency is not installed.
+
+    Examples:
+        >>> from prompt_toolkit.formatted_text import HTML
+        >>> from InquirerPrompt import inquirer
+        >>> from InquirerPrompt.base.control import Choice
+        >>> from InquirerPrompt.utils import rich_to_ansi
+        >>> choices = [
+        ...     Choice("info", name=rich_to_ansi("[green]✓ Info[/green]")),
+        ...     Choice("warn", name=rich_to_ansi("[yellow]⚠ Warn[/yellow]")),
+        ... ]
+        >>> result = inquirer.select(message="Pick one:", choices=choices).execute()
+    """
+    try:
+        from rich.console import Console
+    except ImportError as e:
+        raise InvalidArgument(
+            "The optional dependency 'rich' is required for rich_to_ansi(). "
+            "Install it with: pip install InquirerPrompt[rich]"
+        ) from e
+    output = StringIO()
+    console = Console(
+        file=output,
+        force_terminal=True,
+        color_system=color_system,
+        width=width,
+        legacy_windows=False,
+    )
+    console.print(renderable, end="")
+    return ANSI(output.getvalue())

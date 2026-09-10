@@ -8,7 +8,7 @@ version = "0.5.0"
 description = "Python port of Inquirer.js — a collection of common interactive command-line user interfaces (community-maintained fork of InquirerPy)"
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [
   { name = "Kevin Zhuang", email = "kevin7441@gmail.com" },
 ]
@@ -24,7 +24,6 @@ classifiers = [
   "Operating System :: Unix",
   "Operating System :: Microsoft",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -46,6 +45,9 @@ docs = [
   "myst-parser",
   "sphinx-autobuild",
   "sphinx-copybutton",
+]
+rich = [
+  "rich>=13.0",
 ]
 
 [project.urls]
@@ -71,6 +73,7 @@ dev = [
   # See: https://github.com/python-semantic-release/python-semantic-release/issues/1476
   "gitpython<3.1.60",
   "pyyaml>=6.0.1",
+  "rich>=13.0",
   "ruff>=0.8",
 ]
 
@@ -83,7 +86,7 @@ exclude_lines = ["if TYPE_CHECKING:"]
 
 [tool.ruff]
 line-length = 88
-target-version = "py39"
+target-version = "py310"
 
 [tool.ruff.lint]
 # E/W = pycodestyle, F = pyflakes, I = isort, D = pydocstyle (pep257),
@@ -99,8 +102,10 @@ ignore = [
   "D105",   # missing docstring in magic method (pre-existing)
   "D107",   # missing docstring in __init__ (pre-existing)
   "E501",   # line too long (pre-existing, formatter handles most)
-  "UP006",  # non-pep585-annotation (pre-existing, would break 3.9)
-  "UP035",  # deprecated-import (pre-existing, would break 3.9)
+  "UP006",  # non-pep585-annotation (pre-existing)
+  "UP007",  # non-pep604-annotation-union (pre-existing; migrate to `X | Y` later)
+  "UP035",  # deprecated-import (pre-existing)
+  "UP045",  # non-pep604-annotation-optional (pre-existing; migrate to `X | None` later)
   "UP031",  # printf-string-formatting (pre-existing)
   "E731",   # lambda-assignment (pre-existing, cosmetic)
 ]
