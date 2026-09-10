@@ -42,6 +42,13 @@
     :members:
 ```
 
+### preview
+
+```{eval-rst}
+.. automodule:: InquirerPy.prompts.preview
+    :members:
+```
+
 ### rawlist
 
 ```{eval-rst}

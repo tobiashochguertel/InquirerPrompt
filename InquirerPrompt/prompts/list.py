@@ -7,6 +7,7 @@ from prompt_toolkit.application.application import Application
 from prompt_toolkit.filters.cli import IsDone
 from prompt_toolkit.layout.containers import (
     ConditionalContainer,
+    Container,
     FloatContainer,
     HSplit,
     Window,
@@ -263,6 +264,7 @@ class ListPrompt(BaseListPrompt):
                         show_cursor=self._show_cursor,
                     ),
                     ConditionalContainer(main_content_window, filter=~IsDone()),
+                    *self._extra_content_containers(),
                     ConditionalContainer(
                         Window(content=DummyControl()),
                         filter=~IsDone() & self._is_displaying_long_instruction,
@@ -292,6 +294,17 @@ class ListPrompt(BaseListPrompt):
             after_render=self._after_render,
             erase_when_done=self._erase_when_done,
         )
+
+    def _extra_content_containers(self) -> List[Container]:
+        """Obtain additional containers rendered below the main content window.
+
+        Subclasses can override this hook to insert extra UI elements (e.g. a
+        preview pane) between the choices and the long instruction.
+
+        Returns:
+            A list of `prompt_toolkit` containers.
+        """
+        return []
 
     def _get_prompt_message_with_cursor(self) -> List[Tuple[str, str]]:
         """Obtain the prompt message to display and display cursor behind the message.
