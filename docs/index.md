@@ -147,6 +147,7 @@ pages/prompts/filepath.md
 pages/prompts/number.md
 pages/prompts/confirm.md
 pages/prompts/list.md
+pages/prompts/preview.md
 pages/prompts/rawlist.md
 pages/prompts/expand.md
 pages/prompts/checkbox.md

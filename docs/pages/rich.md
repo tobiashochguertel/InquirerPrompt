@@ -65,3 +65,5 @@ List prompts render choice names on a single line. Keep renderables single-line
 ## See Also
 
 - Demo: `examples/rich_choices.py`
+- {ref}`pages/prompts/preview:preview` — a select prompt with a live preview pane
+  that renders rich renderables natively

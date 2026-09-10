@@ -56,6 +56,7 @@ class TestUtils(unittest.TestCase):
         os.environ["INQUIRERPY_STYLE_POINTER"] = "#555555"
         os.environ["INQUIRERPY_STYLE_CHECKBOX"] = "#66666"
         os.environ["INQUIRERPY_STYLE_SEPARATOR"] = "#777777"
+        os.environ["INQUIRERPY_STYLE_PREVIEW_SEPARATOR"] = "#pppppp"
         os.environ["INQUIRERPY_STYLE_SKIPPED"] = "#888888"
         os.environ["INQUIRERPY_STYLE_FUZZY_PROMPT"] = "#999999"
         os.environ["INQUIRERPY_STYLE_FUZZY_INFO"] = "#aaaaaa"
@@ -82,6 +83,7 @@ class TestUtils(unittest.TestCase):
                     "pointer": "#555555",
                     "checkbox": "#66666",
                     "separator": "#777777",
+                    "preview_separator": "#pppppp",
                     "skipped": "#888888",
                     "fuzzy_prompt": "#999999",
                     "fuzzy_info": "#aaaaaa",
@@ -109,6 +111,7 @@ class TestUtils(unittest.TestCase):
             "pointer": "#555555",
             "checkbox": "#66666",
             "separator": "#777777",
+            "preview_separator": "",
             "skipped": "#888888",
             "fuzzy_prompt": "#999999",
             "fuzzy_info": "#aaaaaa",

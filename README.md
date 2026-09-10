@@ -171,6 +171,34 @@ Keep choice names single-line (or pass `width`) when using rich renderables as c
 
 See the [rich renderables](https://InquirerPrompt.readthedocs.io/en/latest/pages/rich.html) documentation and the `examples/rich_choices.py` demo script.
 
+### Preview Prompt
+
+`select` prompts can display a live preview pane for the highlighted choice. The
+`preview` callable receives the choice value and may return a plain string, a
+`prompt_toolkit` formatted text object, or a rich renderable (with the
+`InquirerPrompt[rich]` extra):
+
+```python
+from rich.panel import Panel
+
+from InquirerPrompt import inquirer
+
+
+def render_preview(value):
+    return Panel(f"Details for {value}", border_style="green")
+
+
+result = inquirer.preview(
+    message="Select an option:",
+    choices=["one", "two", "three"],
+    preview=render_preview,
+    preview_height=7,
+).execute()
+```
+
+See the [preview](https://InquirerPrompt.readthedocs.io/en/latest/pages/prompts/preview.html)
+documentation and the `examples/alternate/preview.py` demo script.
+
 ### Open in Editor
 
 `text` prompts support `open_in_editor=True` so the user can switch to their default editor with the standard `prompt_toolkit` shortcuts (`C-x C-e` in Emacs mode, `v` in Vi navigation mode). This is especially useful for long, multi-line answers:

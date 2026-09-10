@@ -130,6 +130,9 @@ def get_style(
             "pointer": os.getenv("INQUIRERPY_STYLE_POINTER", "#61afef"),
             "checkbox": os.getenv("INQUIRERPY_STYLE_CHECKBOX", "#98c379"),
             "separator": os.getenv("INQUIRERPY_STYLE_SEPARATOR", ""),
+            "preview_separator": os.getenv(
+                "INQUIRERPY_STYLE_PREVIEW_SEPARATOR", "#4b5263"
+            ),
             "skipped": os.getenv("INQUIRERPY_STYLE_SKIPPED", "#5c6370"),
             "validator": os.getenv("INQUIRERPY_STYLE_VALIDATOR", ""),
             "marker": os.getenv("INQUIRERPY_STYLE_MARKER", "#e5c07b"),
@@ -154,6 +157,7 @@ def get_style(
             "pointer": os.getenv("INQUIRERPY_STYLE_POINTER", ""),
             "checkbox": os.getenv("INQUIRERPY_STYLE_CHECKBOX", ""),
             "separator": os.getenv("INQUIRERPY_STYLE_SEPARATOR", ""),
+            "preview_separator": os.getenv("INQUIRERPY_STYLE_PREVIEW_SEPARATOR", ""),
             "skipped": os.getenv("INQUIRERPY_STYLE_SKIPPED", ""),
             "validator": os.getenv("INQUIRERPY_STYLE_VALIDATOR", ""),
             "marker": os.getenv("INQUIRERPY_STYLE_MARKER", ""),

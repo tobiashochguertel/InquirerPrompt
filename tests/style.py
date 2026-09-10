@@ -17,6 +17,7 @@ def get_sample_style(val=None) -> Dict[str, str]:
         "pointer": "#61afef",
         "checkbox": "#98c379",
         "separator": "",
+        "preview_separator": "#4b5263",
         "skipped": "#5c6370",
         "marker": "#e5c07b",
         "validator": "",
