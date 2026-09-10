@@ -70,7 +70,7 @@ Leveraging [prompt_toolkit](https://github.com/prompt-toolkit/python-prompt-tool
 ### Python
 
 ```
-python >= 3.9
+python >= 3.10
 ```
 
 ## Getting Started
