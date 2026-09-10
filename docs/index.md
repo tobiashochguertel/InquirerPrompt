@@ -158,6 +158,7 @@ pages/prompts/fuzzy.md
 :hidden:
 
 pages/style.md
+pages/rich.md
 pages/kb.md
 pages/height.md
 pages/env.md

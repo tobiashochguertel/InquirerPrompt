@@ -140,6 +140,37 @@ Plain string choice names work as before — this feature is fully backward comp
 
 See the [Style](https://InquirerPrompt.readthedocs.io/en/latest/pages/style.html) documentation for available color classes and the `examples/colored_choices.py` demo script.
 
+### Rich Renderables
+
+With the optional [`rich`](https://rich.readthedocs.io) extra, `rich_to_ansi` renders rich renderables (or strings containing rich markup) into prompt_toolkit formatted text, usable anywhere formatted text is accepted — including choice names:
+
+```sh
+pip install "InquirerPrompt[rich]"
+```
+
+```python
+from rich.text import Text
+
+from InquirerPrompt import inquirer
+from InquirerPrompt.base.control import Choice
+from InquirerPrompt.utils import rich_to_ansi
+
+result = inquirer.select(
+    message="Select a status:",
+    choices=[
+        Choice("ok", name=rich_to_ansi("[bold green]✓ OK[/bold green]")),
+        Choice("warn", name=rich_to_ansi("[bold yellow]⚠ Warning[/bold yellow]")),
+        Choice("err", name=rich_to_ansi("[bold red]✗ Error[/bold red]")),
+        Choice("zsh", name=rich_to_ansi(Text("zsh", style="bright_cyan"))),
+    ],
+    border=True,
+).execute()
+```
+
+Keep choice names single-line (or pass `width`) when using rich renderables as choice names.
+
+See the [rich renderables](https://InquirerPrompt.readthedocs.io/en/latest/pages/rich.html) documentation and the `examples/rich_choices.py` demo script.
+
 ### Open in Editor
 
 `text` prompts support `open_in_editor=True` so the user can switch to their default editor with the standard `prompt_toolkit` shortcuts (`C-x C-e` in Emacs mode, `v` in Vi navigation mode). This is especially useful for long, multi-line answers:
