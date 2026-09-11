@@ -44,8 +44,9 @@ jobs:
       - name: Check if release needed
         id: check
         run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
           NEXT_TAG=$(uv run semantic-release version --print-tag 2>/dev/null || echo "")
-          if [ -n "$NEXT_TAG" ]; then
+          if [ -n "$NEXT_TAG" ] && [ "$NEXT_TAG" != "$LATEST_TAG" ]; then
             echo "released=true" >> "$GITHUB_OUTPUT"
             echo "tag=$NEXT_TAG" >> "$GITHUB_OUTPUT"
           else
@@ -59,7 +60,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}
 
       - name: Publish to PyPI
-        if: steps.check.outputs.released == 'true'
+        if: steps.check.outputs.released == 'true' && hashFiles('dist/*') != ''
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
